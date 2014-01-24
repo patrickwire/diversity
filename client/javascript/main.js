@@ -1,19 +1,26 @@
-var gamejs = require('gamejs');
+game = function() {
+    var gamejs = require('gamejs');
+    var Splash = require('splash').Splash;
 
-gamejs.preload([]);
+    gamejs.preload([]);
 
-gamejs.ready(function() {
+    var game = {
+        display: null,
 
-    var display = gamejs.display.setMode([600, 400]);
-    display.blit(
-        (new gamejs.font.Font('30px Sans-serif')).render('Hello World')
-    );
+        currentview: null,
 
-    gamejs.onEvent(function(event) {
-        // event handling
+        loadView: function(View) {
+            game.currentView = new View(game.display);
+            gamejs.onEvent(game.currentView.onEvent);
+            gamejs.onTick(game.currentView.onTick);
+        }
+    }
+
+    gamejs.ready(function() {
+        game.display = gamejs.display.setMode([600, 400]);
+
+        game.loadView(Splash);
     });
 
-    gamejs.onTick(function(msDuration) {
-        // game loop
-    });
-});
+    return game;
+}();
