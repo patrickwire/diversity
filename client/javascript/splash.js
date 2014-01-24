@@ -1,7 +1,7 @@
 var gamejs = require('gamejs');
-var GameView = require('view/gameView').GameView;
+var GameView = require('game').View;
 
-exports.SplashView = function(display) {
+exports.View = function(display) {
 
     this.onTick = function() {
         display.clear();
