@@ -1,4 +1,5 @@
 var gamejs = require('gamejs');
+var Game = require('game').Game;
 
 exports.Splash = function(display) {
 
@@ -10,8 +11,12 @@ exports.Splash = function(display) {
     };
 
     this.onEvent = function(event) {
-        // event handling
+        switch (event.type) {
+            case gamejs.event.MOUSE_DOWN:
+                game.loadView(Game);
+                break;
+        }
     };
 
     return this;
-}
+};
