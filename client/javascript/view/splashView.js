@@ -1,7 +1,7 @@
 var gamejs = require('gamejs');
-var Game = require('game').Game;
+var GameView = require('view/gameView').GameView;
 
-exports.Splash = function(display) {
+exports.SplashView = function(display) {
 
     this.onTick = function() {
         display.clear();
@@ -13,7 +13,7 @@ exports.Splash = function(display) {
     this.onEvent = function(event) {
         switch (event.type) {
             case gamejs.event.MOUSE_DOWN:
-                game.loadView(Game);
+                game.loadView(GameView);
                 break;
         }
     };

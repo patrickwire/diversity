@@ -1,6 +1,6 @@
-game = function() {
+game = (function() {
     var gamejs = require('gamejs');
-    var Splash = require('splash').Splash;
+    var SplashView = require('view/splashView').SplashView;
 
     gamejs.preload([]);
 
@@ -14,13 +14,13 @@ game = function() {
             gamejs.onEvent(game.currentView.onEvent);
             gamejs.onTick(game.currentView.onTick);
         }
-    }
+    };
 
     gamejs.ready(function() {
         game.display = gamejs.display.setMode([600, 400]);
 
-        game.loadView(Splash);
+        game.loadView(SplashView);
     });
 
     return game;
-}();
+}());
