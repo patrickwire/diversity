@@ -1,8 +1,8 @@
 game = (function() {
+    require('preload');
+
     var gamejs = require('gamejs');
     var SplashView = require('splash').View;
-
-    gamejs.preload([]);
 
     var game = {
         display: null,
