@@ -1,2 +1,7 @@
 var gamejs = require('gamejs');
-gamejs.preload([]);
+var constants = require('constants');
+
+gamejs.preload([
+    constants.tmxTileset,
+    constants.tmxFile
+]);
