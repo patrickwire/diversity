@@ -1,6 +1,7 @@
 var state = require('gamestate');
 var constants = require('constants');
 var gamejs = require('gamejs');
+var guid = require('util').guid;
 
 exports.Bullet=function(start,target,currentLayer) {
     this.visible=true;
@@ -13,6 +14,8 @@ exports.Bullet=function(start,target,currentLayer) {
     this.directionX/=scalar;
     this.directionY/=scalar;
     this.speed = constants.bullet.speed;
+    // generate a uuid
+    this.id = guid();
     //Spawn
     this.rect = new gamejs.Rect([start[0],start[1]], this.size);
     this.update = function(dt) {
