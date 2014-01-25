@@ -35,6 +35,7 @@ exports.Player = function(position,view) {
 
            this.currentLayer = this.layers[Math.floor(Math.random()*this.layers.length%this.layers.length)];
         }
+        this.publishPosition();
 
     };
     this.shot =function (target){
