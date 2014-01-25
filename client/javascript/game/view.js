@@ -18,20 +18,20 @@ exports.View = function(display) {
 
         display.clear();
         drawBackground();
-        player.draw(state.display)
+        player.draw(state.display);
     };
 
     this.onEvent = function(event) {
         if (event.type === gamejs.event.KEY_UP) {
-            if (event.key === gamejs.event.K_LEFT) player.direction=0;
-            if (event.key === gamejs.event.K_RIGHT) player.direction=0;
-            if (event.key === gamejs.event.K_UP) player.direction=0;
-            if (event.key === gamejs.event.K_DOWN) player.direction=0;
+            if (event.key === gamejs.event.K_LEFT) {player.direction=0;}
+            if (event.key === gamejs.event.K_RIGHT) {player.direction=0;}
+            if (event.key === gamejs.event.K_UP) {player.direction=0;}
+            if (event.key === gamejs.event.K_DOWN) {player.direction=0;}
         }
         if (event.type === gamejs.event.KEY_DOWN) {
             if (event.key === gamejs.event.K_LEFT) {
                player.direction = constants.directions.LEFT;
-                Console.log(player.direction)
+                Console.log(player.direction);
             }
         }
     };
