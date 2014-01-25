@@ -31,7 +31,8 @@ class Game
   end
 
   def handleMessage(sockid, message)
-    players.reject {|p| p.socket.object_id == sockid}.each do |p|
+    players.each do |p|
+      next if p.socket.object_id == sockid
       p.socket.send Json.generate(message)
     end
   end
