@@ -1,12 +1,13 @@
 var gamejs = require('gamejs');
 var constants = require('constants');
+var state = require('gamestate');
 
 exports.Other = function(id, position, mood) {
   this.id = id;
   this.image = gamejs.image.load(constants.graphics.player);
   var rect = new gamejs.Rect(position, this.image.getSize());
   this.mood = mood;
-  this.bullets=new Array();
+  this.bullets = [];
 
   this.checkHit = function(bullet) {
     if (rect.collideRect(bullet.rect)) {
