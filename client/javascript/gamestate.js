@@ -36,7 +36,7 @@ exports.server.connect = function() {
         }
 
         if (exports.server.onmessage) {
-            exports.server.onmessage(message);
+            exports.server.onmessage(data);
         } else {
             alert("Got message but nobody listens!");
         }

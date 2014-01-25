@@ -9,9 +9,7 @@ exports.View = function(display) {
   var ourID;
 
   state.server.connect();
-  state.server.onmessage = function(message) {
-    var data = JSON.parse(message.data);
-    console.log(message.data);
+  state.server.onmessage = function(data) {
     switch (data.type) {
       case "RegistrationSuccessful":
         registered = true;
@@ -40,11 +38,11 @@ exports.View = function(display) {
     } else {
       var message = 'Waiting for other players...';
       if (numPlayers > 1) {
+        display.blit((new gamejs.font.Font('20px Sans-serif')).render("Press enter to start"), [50, 50]);
         message += " (" + numPlayers + " in Pool)";
       }
       display.blit((new gamejs.font.Font('30px Sans-serif')).render(message));
 
-      display.blit((new gamejs.font.Font('20px Sans-serif')).render("Press enter to start"), [50, 50]);
     }
   };
 
