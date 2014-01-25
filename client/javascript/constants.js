@@ -6,9 +6,10 @@ PATH = {
 
 exports.tmxTileset = "./data/tileset.png";
 exports.tmxFile = "./data/maps.tmx";
-exports.walkableTiles = [2];
+exports.walkableTiles = "walkable";
+exports.fallableTiles = "fallable";
 
-exports.mapsPerPlayer = 1;
+exports.mapsPerPlayer = 2;
 exports.graphics = {
     player:PATH.IMG + 'player.png',
     bullet:PATH.IMG + 'bullet.png'

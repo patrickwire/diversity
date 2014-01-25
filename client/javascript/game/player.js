@@ -2,8 +2,9 @@ var state = require('gamestate');
 var constants = require('constants');
 var gamejs = require('gamejs');
 var Bullet = require('game/bullet').Bullet;
-exports.Player = function(position) {
+exports.Player = function(position,view) {
 
+    this.view=view;
     this.bullets=new Array();
     this.directionX = 0;
     this.directionY = 0;
@@ -29,6 +30,10 @@ exports.Player = function(position) {
         //Move, if we are still inside the screen afterwards
         if (this.currentLayer.isWalkablePosition(newRect)) {
             rect = newRect;
+        }
+        if (this.currentLayer.isFallablePosition(newRect)) {
+
+           this.currentLayer = this.layers[Math.floor(Math.random()*this.layers.length%this.layers.length)];
         }
 
     };

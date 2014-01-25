@@ -11,7 +11,7 @@ exports.MapDB = function(tmxUrl) {
          width: map.width,
          height: map.height,
          tiles: map.tiles
-      });
+      },map);
    });
 
     this.getRandomLayers = function(count) {
