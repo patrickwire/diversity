@@ -1,5 +1,6 @@
 var gamejs = require('gamejs');
 var GameView = require('game').View;
+var game = require('gamestate');
 
 exports.View = function(display) {
 
