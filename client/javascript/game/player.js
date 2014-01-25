@@ -4,8 +4,8 @@ var gamejs = require('gamejs');
 log="";
 exports.Player = function(position) {
 
-
-    this.direction = 0;
+    this.directionX = 0;
+    this.directionY = 0;
     this.image = gamejs.image.load(constants.graphics.player);
     this.layers = state.mapDB.getRandomLayers(constants.mapsPerPlayer);
     this.currentLayer = this.layers[0];
@@ -17,23 +17,18 @@ exports.Player = function(position) {
     this.update = function(dt) {
 
         //Calculate new position
-        if(this.direction !== 0){
-            var amountX =
-                (this.direction%2 *
-                    (this.direction+constants.directionOffset.horizontal)) * constants.player.speed * dt;
-            var newLeft = rect.left + amountX;
-            var amountY = ((1+this.direction)%2 *
-                (this.direction+constants.directionOffset.vertical)) * constants.player.speed * dt;
-            var newTop = rect.top + amountY;
-            log=amountX+' '+amountY+' '+this.direction;
-            var newRect = new gamejs.Rect(rect);
-            newRect.top = newTop;
-            newRect.left = newLeft;
+        var amountX =this.directionX * constants.player.speed * dt;
+        var newLeft = this.rect.left + amountX;
+        var amountY = this.directionY * constants.player.speed * dt;
+        var newTop = this.rect.top + amountY;
 
-            //Move, if we are still inside the screen afterwards
-            if (this.currentLayer.isWalkablePosition(newRect)) {
-                rect = newRect;
-            }
+        var newRect = new gamejs.Rect(rect);
+        newRect.top = newTop;
+        newRect.left = newLeft;
+        //Move, if we are still inside the screen afterwards
+        if (this.currentLayer.isWalkablePosition(newRect)) {
+            rect = newRect;
         }
+
     };
 };

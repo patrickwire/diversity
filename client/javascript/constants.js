@@ -10,7 +10,8 @@ exports.walkableTiles = [2];
 
 exports.mapsPerPlayer = 1;
 exports.graphics = {
-    player:PATH.IMG + 'player.png'
+    player:PATH.IMG + 'player.png',
+    bullet:PATH.IMG + 'bullet.png'
 };
 exports.map={width:600,height:400};
 exports.directions={LEFT:1,RIGHT:3,UP:2,DOWN:4};
