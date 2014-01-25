@@ -1,9 +1,10 @@
 var state = require('gamestate');
 var constants = require('constants');
 var gamejs = require('gamejs');
-log="";
+var Bullet = require('game/bullet').Bullet;
 exports.Player = function(position) {
 
+    this.bullets=new Array();
     this.directionX = 0;
     this.directionY = 0;
     this.image = gamejs.image.load(constants.graphics.player);
@@ -31,4 +32,10 @@ exports.Player = function(position) {
         }
 
     };
+    this.shot =function (target){
+
+        var start=rect.center;
+        var bull=new Bullet(start,target,this.currentLayer);
+        this.bullets.push(bull);
+    }
 };
