@@ -14,7 +14,7 @@ exports.View = function(display) {
         UP:false,
         DOWN:false
     };
-    var player = new Player([1,1]);
+    var player = new Player([4,4]);
     player.publishPosition();
 
     var drawBackground = function() {
@@ -28,7 +28,8 @@ exports.View = function(display) {
                 break;
                 case "Hit":
                 if (message.playerId === player.id()) {
-                    alert("I got hit!");
+                    player.hitpoints -= 1;
+                    console.log(player.hitpoints + " left!");
                 }
                 break;
             default:

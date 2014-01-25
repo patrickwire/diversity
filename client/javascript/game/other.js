@@ -1,12 +1,14 @@
 var gamejs = require('gamejs');
+var state = require('gamestate');
 var constants = require('constants');
+var graphicsDB = require('graphicsDB');
 
 exports.Other = function(id, position, mood) {
   this.id = id;
-  this.image = gamejs.image.load(constants.graphics.player);
-  var rect = new gamejs.Rect(position, this.image.getSize());
+  var rect = new gamejs.Rect(position, [24, 24]);
   this.mood = mood;
   this.bullets=new Array();
+  this.image = graphicsDB.getPlayerIconForMood(this.mood);
 
   this.checkHit = function(bullet) {
     if (rect.collideRect(bullet.rect)) {
@@ -21,12 +23,15 @@ exports.Other = function(id, position, mood) {
   };
 
   this.draw = function(display) {
-    display.blit(this.image, rect);
+    display.blit(this.image, [rect.left - 4, rect.top - 4]);
   };
 
   this.update = function(data) {
     rect.left = data.position[0];
     rect.top = data.position[1];
-    this.mood = data.mood;
+    if (data.mood !== this.mood) {
+      this.mood = data.mood;
+      this.image = gamejs.image.load(constants.graphics.player);
+    }
   };
 };
