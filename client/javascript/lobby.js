@@ -26,7 +26,7 @@ exports.View = function(display) {
         alert("Game is already running, sorry");
         break;
       case "GameStarting":
-        alert("not implemented");
+        state.loadView(GameView);
         break;
       default:
         alert("Unknown message");
@@ -56,7 +56,6 @@ exports.View = function(display) {
         event.key === gamejs.event.K_ENTER) {
       if (numPlayers >= 2) {
         connection.send(JSON.stringify({type: "StartGame"}));
-        state.loadView(GameView);
       }
     }
   };
