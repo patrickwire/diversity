@@ -7,7 +7,7 @@ var constants = require('constants');
 exports.View = function(display) {
 
 
-    var player = new Player([1,1]);
+    var player = new Player([4,4]);
 
     var drawBackground = function() {
         player.currentLayer.draw(state.display);
