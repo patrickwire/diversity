@@ -19,7 +19,7 @@ exports.Player = function(position,view) {
     this.layers = state.mapDB.getRandomLayers(constants.mapsPerPlayer);
     this.currentLayer = this.layers[0];
     var rect = new gamejs.Rect(position, this.image.getSize());
-
+    this.spawn();
     this.draw = function(display) {
         display.blit(this.image, rect);
     };
