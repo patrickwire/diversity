@@ -20,7 +20,10 @@ class Game
 
   def initialize(players)
     @players = players
-    #startthegame
+    @players.each do |p|
+      LOG.debug("sending #{JSON.generate({type: "GameStarting"})}")
+      p.socket.send JSON.generate({type: "GameStarting"})
+    end
   end
 
   def contains_player_with_socket_id(sockid)
