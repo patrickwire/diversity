@@ -18,8 +18,8 @@ exports.Layer = function(layer, opts) {
        var lastRow = Math.floor((rect.bottom - 1) / this.tileHeight);
 
        var ret = [];
-       this.tiles.slice(firstRow, lastRow - firstRow + 1).forEach(function(row) {
-           ret.push(row.slice(firstColumn, lastColumn - firstColumn + 1));
+       this.tiles.slice(firstRow, lastRow + 1).forEach(function(row) {
+           ret.push(row.slice(firstColumn, lastColumn + 1));
        });
        return ret;
    };
