@@ -11,6 +11,7 @@ exports.Player = function(position,view) {
             rect.top=spawnpoint[1];
         }
     };
+    this.id = function() {return state.server.ourId;};
     this.view=view;
     this.bullets = [];
     this.directionX = 0;
