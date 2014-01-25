@@ -10,8 +10,8 @@ exports.mapsPerPlayer = 1;
 exports.graphics = {
     player:PATH.IMG + 'player.png'
 }
-exports.map={width:800,height:600}
-exports.directions={LEFT:3,RIGHT:1,UP:2,DOWN:4}
+exports.map={width:600,height:400}
+exports.directions={LEFT:1,RIGHT:3,UP:2,DOWN:4}
 exports.directionOffset={vertical:-3,horizontal:-2}
 exports.player={
     speed:20
