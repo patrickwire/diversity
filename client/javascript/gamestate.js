@@ -1,8 +1,7 @@
 var gamejs = require('gamejs');
 
-exports.display = null;
-
 exports.currentView = null;
+exports.display = null;
 
 exports.loadView = function(View) {
     exports.currentView = new View(exports.display);
@@ -10,3 +9,6 @@ exports.loadView = function(View) {
     gamejs.onTick(exports.currentView.onTick);
 };
 
+exports.initialize = function() {
+    exports.display = gamejs.display.setMode([600, 400]);
+};
