@@ -38,11 +38,11 @@ exports.View = function(display) {
     } else {
       var message = 'Waiting for other players...';
       if (numPlayers > 1) {
+        display.blit((new gamejs.font.Font('20px Sans-serif')).render("Press enter to start"), [50, 50]);
         message += " (" + numPlayers + " in Pool)";
       }
       display.blit((new gamejs.font.Font('30px Sans-serif')).render(message));
 
-      display.blit((new gamejs.font.Font('20px Sans-serif')).render("Press enter to start"), [50, 50]);
     }
   };
 
