@@ -4,32 +4,35 @@ var gamejs = require('gamejs');
 log="";
 exports.Player = function(position) {
 
+
     this.direction = 0;
     this.image = gamejs.image.load(constants.graphics.player);
-    this.rect = new gamejs.Rect(position, this.image.getSize());
     this.layers = state.mapDB.getRandomLayers(constants.mapsPerPlayer);
     this.currentLayer = this.layers[0];
+    var rect = new gamejs.Rect(position, this.image.getSize());
+
     this.draw = function(display) {
-        display.blit(this.image, this.rect);
+        display.blit(this.image, rect);
     };
     this.update = function(dt) {
 
         //Calculate new position
-        if(this.direction!=0){
+        if(this.direction !== 0){
             var amountX =
                 (this.direction%2 *
                     (this.direction+constants.directionOffset.horizontal)) * constants.player.speed * dt;
-            var newLeft = this.rect.left + amountX;
+            var newLeft = rect.left + amountX;
             var amountY = ((1+this.direction)%2 *
                 (this.direction+constants.directionOffset.vertical)) * constants.player.speed * dt;
-            var newTop = this.rect.top + amountY;
-            log=amountX+' '+amountY+' '+this.direction
+            var newTop = rect.top + amountY;
+            log=amountX+' '+amountY+' '+this.direction;
+            var newRect = new gamejs.Rect(rect);
+            newRect.top = newTop;
+            newRect.left = newLeft;
+
             //Move, if we are still inside the screen afterwards
-            if (newLeft > 0 && newLeft + this.rect.width < constants.map.width) {
-                this.rect.moveIp(amountX, 0);
-            }
-            if (newTop > 0 && newTop + this.rect.height < constants.map.height) {
-                this.rect.moveIp(0,amountY);
+            if (this.currentLayer.isWalkablePosition(newRect)) {
+                rect = newRect;
             }
         }
     };
