@@ -1,6 +1,7 @@
 var state = require('gamestate');
 var constants = require('constants');
 var gamejs = require('gamejs');
+var guid = require('util').guid;
 
 exports.Bullet=function(start,target,currentLayer) {
     this.visible=true;

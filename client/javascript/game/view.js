@@ -26,7 +26,7 @@ exports.View = function(display) {
             case "PlayerStatus":
                 this.addOrUpdateOtherPlayer(message);
                 break;
-            case "Hit":
+                case "Hit":
                 if (message.playerId === player.id()) {
                     alert("I got hit!");
                 }
