@@ -11,6 +11,7 @@ exports.Player = function(position,view) {
             rect.top=spawnpoint[1];
         }
     }
+    var ticks=0;
     this.view=view;
     this.bullets = [];
     this.directionX = 0;
@@ -43,7 +44,9 @@ exports.Player = function(position,view) {
            this.currentLayer = this.layers[Math.floor(Math.random()*this.layers.length%this.layers.length)];
             this.spawn();
         }
+        if(ticks%2==0)
         this.publishPosition();
+        ticks++;
 
     };
     this.shot =function (target){
@@ -54,12 +57,18 @@ exports.Player = function(position,view) {
     };
 
     this.publishPosition = function() {
+        var bull=[];
+        $(this.bullets).each(function(){
+           if(this.visible){
+               bull.push({x:this.rect.left,y:this.rect.top,directionX:this.directionX,directionY:this.directionY})
+           }
+        });
         state.server.connection.send(JSON.stringify({
             type: "PlayerStatus",
             id: state.server.ourId,
             position: [rect.left, rect.top],
             mood: "funny",
-            bullets: []
+            bullets: bull
         }));
     };
 };

@@ -1,5 +1,6 @@
 var gamejs = require('gamejs');
 var Player = require('game/player').Player;
+var Bullet = require('game/bullet').Bullet;
 var Layer = require('layer').Layer;
 var state = require('gamestate');
 var constants = require('constants');
@@ -39,6 +40,13 @@ exports.View = function(display) {
         } else {
             otherPlayers[data.id] = new Other(data.id, data.position, data.mood);
         }
+        otherPlayers[data.id].bullets=[];
+        gamejs.log(data);
+        gamejs.log(data.bullets);
+        for (i in data.bullets){
+            var bull = new Bullet([data.bullets[i].x,data.bullets[i].y],[data.bullets[i].x,data.bullets[i].y],player.currentLayer);
+            otherPlayers[data.id].bullets.push(bull);
+        }
     };
 
     this.onTick = function() {
@@ -55,6 +63,9 @@ exports.View = function(display) {
         player.draw(state.display);
         $.each(otherPlayers, function(idx, other) {
             other.draw(display);
+            $.each(other.bullets, function( index, value ) {
+                this.draw(display);
+            });
         });
 
         $.each(player.bullets, function( index, value ) {

@@ -10,27 +10,36 @@ exports.Bullet=function(start,target,currentLayer) {
     this.directionX=target[0]-start[0];
     this.directionY=target[1]-start[1];
     var scalar=Math.sqrt(this.directionX*this.directionX+this.directionY*this.directionY);
-    this.directionX/=scalar;
-    this.directionY/=scalar;
-    this.speed = constants.bullet.speed;
+    if(scalar!=0){
+        this.directionX/=scalar;
+        this.directionY/=scalar;
+        this.speed = constants.bullet.speed;
+    }else{
+        this.speed=0;
+    }
     //Spawn
     this.rect = new gamejs.Rect([start[0],start[1]], this.size);
+    gamejs.log(start);
+    gamejs.log(this.rect);
     this.update = function(dt) {
         //Movement
-        var x = this.directionX * this.speed * dt;
-        var y = this.directionY * this.speed * dt;
-        var newRect = new gamejs.Rect(this.rect);
-        newRect.top = this.rect.top+y;
-        newRect.left = this.rect.left+x;
-        //Move, if we are still inside the screen afterwards
-        if (this.currentLayer.isWalkablePosition(newRect)) {
-            this.rect = newRect;
-        }else{
-            this.visible=false;
+        if(this.directionX!= NaN || this.directionY!=NAN){
+            var x = this.directionX * this.speed * dt;
+            var y = this.directionY * this.speed * dt;
+            var newRect = new gamejs.Rect(this.rect);
+            newRect.top = this.rect.top+y;
+            newRect.left = this.rect.left+x;
+            //Move, if we are still inside the screen afterwards
+            if (this.currentLayer.isWalkablePosition(newRect)) {
+                this.rect = newRect;
+            }else{
+                this.visible=false;
+            }
         }
     };
 
     this.draw = function(display) {
+       // gamejs.log(this.rect);
         if (this.visible)
         display.blit(this.image, this.rect);
     };

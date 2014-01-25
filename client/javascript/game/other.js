@@ -6,7 +6,7 @@ exports.Other = function(id, position, mood) {
   this.image = gamejs.image.load(constants.graphics.player);
   var rect = new gamejs.Rect(position, this.image.getSize());
   this.mood = mood;
-
+  this.bullets=new Array();
   this.draw = function(display) {
     display.blit(this.image, rect);
   };
