@@ -18,9 +18,9 @@ exports.Player = function(position) {
 
         //Calculate new position
         var amountX =this.directionX * constants.player.speed * dt;
-        var newLeft = this.rect.left + amountX;
+        var newLeft = rect.left + amountX;
         var amountY = this.directionY * constants.player.speed * dt;
-        var newTop = this.rect.top + amountY;
+        var newTop = rect.top + amountY;
 
         var newRect = new gamejs.Rect(rect);
         newRect.top = newTop;
