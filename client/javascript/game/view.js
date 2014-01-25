@@ -14,7 +14,7 @@ exports.View = function(display) {
     };
 
     this.onTick = function() {
-        player.update(0.03);
+        player.update(0.06);
 
         display.clear();
         drawBackground();
@@ -31,7 +31,15 @@ exports.View = function(display) {
         if (event.type === gamejs.event.KEY_DOWN) {
             if (event.key === gamejs.event.K_LEFT) {
                player.direction = constants.directions.LEFT;
-                Console.log(player.direction);
+            }
+            if (event.key === gamejs.event.K_RIGHT) {
+                player.direction = constants.directions.RIGHT;
+            }
+            if (event.key === gamejs.event.K_UP) {
+                player.direction = constants.directions.UP;
+            }
+            if (event.key === gamejs.event.K_DOWN) {
+                player.direction = constants.directions.DOWN;
             }
         }
     };

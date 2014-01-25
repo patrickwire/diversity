@@ -1,7 +1,7 @@
 var state = require('gamestate');
 var constants = require('constants');
 var gamejs = require('gamejs');
-
+log="";
 exports.Player = function(position) {
 
     this.direction = 0;
@@ -15,17 +15,22 @@ exports.Player = function(position) {
     this.update = function(dt) {
 
         //Calculate new position
-        var amountX = (this.direction - constants.directionOffset.horizontal) * constants.player.speed * dt;
-        var newLeft = this.rect.left + amountX;
-        var amountY = (this.direction - constants.directionOffset.vertical) * constants.player.speed * dt;
-        var newTop = this.rect.top + amountY;
-
-        //Move, if we are still inside the screen afterwards
-        if (newLeft > 0 && newLeft + this.rect.width < constants.map.width) {
-            this.rect.moveIp(amountX, 0);
-        }
-        if (newTop > 0 && newTop + this.rect.height < constants.map.height) {
-            this.rect.moveIp(0,amountY);
+        if(this.direction!=0){
+            var amountX =
+                (this.direction%2 *
+                    (this.direction+constants.directionOffset.horizontal)) * constants.player.speed * dt;
+            var newLeft = this.rect.left + amountX;
+            var amountY = ((1+this.direction)%2 *
+                (this.direction+constants.directionOffset.vertical)) * constants.player.speed * dt;
+            var newTop = this.rect.top + amountY;
+            log=amountX+' '+amountY+' '+this.direction
+            //Move, if we are still inside the screen afterwards
+            if (newLeft > 0 && newLeft + this.rect.width < constants.map.width) {
+                this.rect.moveIp(amountX, 0);
+            }
+            if (newTop > 0 && newTop + this.rect.height < constants.map.height) {
+                this.rect.moveIp(0,amountY);
+            }
         }
     };
 };
