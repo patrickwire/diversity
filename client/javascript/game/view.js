@@ -3,6 +3,7 @@ var Player = require('game/player').Player;
 var Layer = require('layer').Layer;
 var state = require('gamestate');
 var constants = require('constants');
+var Other = require('game/other').Other;
 
 exports.View = function(display) {
 
@@ -19,8 +20,25 @@ exports.View = function(display) {
         player.currentLayer.draw(state.display);
     };
 
-    state.server.onmessage = function(message) {
-        debugger;
+    state.server.onmessage = $.proxy(function(message) {
+        switch (message.type) {
+            case "PlayerStatus":
+                this.addOrUpdateOtherPlayer(message);
+                break;
+            default:
+                alert("unknown message");
+                throw "unknown message";
+        }
+    }, this);
+
+    var otherPlayers = {};
+
+    this.addOrUpdateOtherPlayer = function(data) {
+        if (otherPlayers[data.id]) {
+            otherPlayers[data.id].update(data);
+        } else {
+            otherPlayers[data.id] = new Other(data.id, data.position, data.mood);
+        }
     };
 
     this.onTick = function() {
@@ -35,6 +53,10 @@ exports.View = function(display) {
         drawBackground();
 
         player.draw(state.display);
+        $.each(otherPlayers, function(idx, other) {
+            other.draw(display);
+        });
+
         $.each(player.bullets, function( index, value ) {
             this.draw(display);
         });
