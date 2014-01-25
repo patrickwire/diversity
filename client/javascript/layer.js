@@ -88,6 +88,19 @@ exports.Layer = function(layer, opts,map) {
            this.surface.blit(tileSurface, this.tiles[i][j].rect);
       }, this);
    }, this);
+    this.findObject = function(property) {
+
+        for (var y = 0; y < map.height; y++) {
+            for (var x = 0; x < map.width; x++) {
+
+                var properties = map.tiles.getProperties(layer.gids[y][x]);
+                for (p in properties) {
+                    if(p==property)
+                        return ([x * map.tileWidth, y * map.tileHeight]);
+                }
+            }
+        }
+    }
    return this;
 };
 

@@ -8,6 +8,7 @@ exports.tmxTileset = "./data/tileset.png";
 exports.tmxFile = "./data/maps.tmx";
 exports.walkableTiles = "walkable";
 exports.fallableTiles = "fallable";
+exports.spawnTiles = "spawn";
 
 exports.mapsPerPlayer = 2;
 exports.graphics = {
