@@ -25,12 +25,15 @@ exports.View = function(display) {
 
     this.onTick = function() {
         var dt =0.06;
+
         player.update(dt);
         $.each(player.bullets, function( index, value ) {
             this.update(dt);
         });
+
         display.clear();
         drawBackground();
+
         player.draw(state.display);
         $.each(player.bullets, function( index, value ) {
             this.draw(display);
