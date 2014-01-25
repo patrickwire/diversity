@@ -33,7 +33,7 @@ class Game
   def handleMessage(sockid, message)
     players.each do |p|
       next if p.socket.object_id == sockid
-      p.socket.send Json.generate(message)
+      p.socket.send JSON.generate(message)
     end
   end
 
