@@ -2,6 +2,8 @@ var gamejs = require('gamejs');
 var MapDB = require('mapDB').MapDB;
 var constants = require('constants');
 
+gamestate = exports;
+
 exports.currentView = null;
 exports.display = null;
 exports.mapDB = null;

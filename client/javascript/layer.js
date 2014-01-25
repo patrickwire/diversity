@@ -1,9 +1,9 @@
 var gamejs = require('gamejs');
 /**
- * LayerView
+ * Layer
  * Renders the layer to a big surface.
  */
-exports.LayerView = function(layer, opts) {
+exports.Layer = function(layer, opts) {
 
    this.draw = function(display, offset) {
       display.blit(this.surface, offset);
