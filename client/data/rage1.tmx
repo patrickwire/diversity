@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="31" height="31" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="Canvas" tilewidth="32" tileheight="32">
+  <image source="Canvas.png" width="992" height="992"/>
+  <tile id="496">
+   <properties>
+    <property name="fallable" value="1"/>
+    <property name="walkable" value="1"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="962" name="rect18760-7-7-4-9-09" tilewidth="32" tileheight="32">
+  <image source="rect18760-7-7-4-9-09.png" width="32" height="224"/>
+  <tile id="1">
+   <properties>
+    <property name="walkable" value="1"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Kachelebene 1" width="31" height="31">
+  <data encoding="base64" compression="zlib">
+   eJy9lr1twzAQhUVkCZXZImW2cOktVGYLl9kipUtvoFJbuHQXEvABD8/3awsuDrYkUp/43t2Rc5um7+n98dW5v/338vEYc392ugfO+TTGcxyDsYNrsbd+/69zb0mWFc2Y77Gza8voofE19k/xHRWdI/bZmBtxq2OFfUzotofPqEvVb8z9EaNO8BleMx+9bFOdLbkvgTWw9OtDs+cyhzU/UU1XPFiCerTYuK6Vvt/Le/FwfGfUBziHNc1ZO3zOnlZy38pz9hTXwLq82uc8duRTJmYjZ7CWM2yr11i6D+6a2AcsdrXXCF/jXttjWOwof6y897g4zmNHYXnA9aFxX2WLJ+yHxq76jXsy92cvRv1l2Nl1L8r+EK3Fy7Eo1zwdo1yM6jHS3GNrtcy6ZM9RGfZ671Hae6J9cwTWJP7HPVTrfdo+XWWjD2eFnfUoy+b+o9XkM2z0XPZ7PjuhTtH5HPPDC81zOUfJecfjth01r3qP/D3ZlXOFnFO3pN57x/jOf2VNfZg=
+  </data>
+ </layer>
+</map>
