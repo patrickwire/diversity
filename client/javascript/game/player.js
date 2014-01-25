@@ -5,7 +5,7 @@ var Bullet = require('game/bullet').Bullet;
 exports.Player = function(position,view) {
 
     this.view=view;
-    this.bullets=new Array();
+    this.bullets = [];
     this.directionX = 0;
     this.directionY = 0;
     this.image = gamejs.image.load(constants.graphics.player);
@@ -42,5 +42,5 @@ exports.Player = function(position,view) {
         var start=rect.center;
         var bull=new Bullet(start,target,this.currentLayer);
         this.bullets.push(bull);
-    }
+    };
 };

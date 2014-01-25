@@ -11,7 +11,7 @@ exports.View = function(display) {
         RIGHT:false,
         UP:false,
         DOWN:false
-    }
+    };
     var player = new Player([1,1]);
 
     var drawBackground = function() {
