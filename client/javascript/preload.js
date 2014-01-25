@@ -1,2 +1,13 @@
 var gamejs = require('gamejs');
-gamejs.preload([]);
+
+PATH = {
+    IMG : './graphics/',
+    SFX : './sfx/',
+    TMX : './tmx/'
+}
+
+gamejs.preload([
+//graphics
+    //Entities
+    PATH.IMG + 'player.png',
+]);
