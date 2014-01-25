@@ -19,7 +19,7 @@ exports.MapDB = function(tmxUrl) {
             throw "not enough layers";
         }
 
-        var views = layer.slice(0);
+        var views = layers.slice(0);
         var ret = [];
 
         while (count-- > 0) {
