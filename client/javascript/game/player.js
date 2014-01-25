@@ -2,28 +2,32 @@ var state = require('gamestate');
 var constants = require('constants');
 var gamejs = require('gamejs');
 var Bullet = require('game/bullet').Bullet;
+var util = require('util');
+var graphicsDB = require('graphicsDB');
+
 exports.Player = function(position,view) {
 
     this.spawn=function(){
         var spawnpoint=this.currentLayer.findObject(constants.spawnTiles);
         if(spawnpoint!==undefined){
-            rect.left=spawnpoint[0];
-            rect.top=spawnpoint[1];
+            rect.left = spawnpoint[0] + 4;
+            rect.top = spawnpoint[1] + 4;
         }
     };
     this.id = function() {return state.server.ourId;};
     this.view=view;
     this.bullets = [];
     this.hitpoints = constants.player.startingHitpoints;
+    this.mood = util.randomMood();
     this.directionX = 0;
     this.directionY = 0;
-    this.image = gamejs.image.load(constants.graphics.player);
+    this.image = graphicsDB.getPlayerIconForMood(this.mood);
     this.layers = state.mapDB.getRandomLayers(constants.mapsPerPlayer);
     this.currentLayer = this.layers[0];
-    var rect = new gamejs.Rect(position, this.image.getSize());
+    var rect = new gamejs.Rect(position, [24, 24]);
     this.spawn();
     this.draw = function(display) {
-        display.blit(this.image, rect);
+        display.blit(this.image, [rect.left - 4, rect.top - 4]);
     };
     this.update = function(dt) {
 
@@ -60,7 +64,7 @@ exports.Player = function(position,view) {
             type: "PlayerStatus",
             id: state.server.ourId,
             position: [rect.left, rect.top],
-            mood: "funny",
+            mood: this.mood,
             bullets: []
         }));
     };

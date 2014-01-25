@@ -13,7 +13,7 @@ exports.View = function(display) {
         UP:false,
         DOWN:false
     };
-    var player = new Player([1,1]);
+    var player = new Player([4,4]);
     player.publishPosition();
 
     var drawBackground = function() {

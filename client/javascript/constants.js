@@ -15,6 +15,14 @@ exports.graphics = {
     player:PATH.IMG + 'player.png',
     bullet:PATH.IMG + 'bullet.png'
 };
+exports.moods = ['anger', 'fear', 'sadness', 'confusion', 'denial'];
+exports.moodGraphicsOrder = {
+    anger: 0,
+    fear: 1,
+    sadness: 2,
+    confusion: 3,
+    denial: 4
+};
 exports.map={width:600,height:400};
 exports.directions={LEFT:1,RIGHT:3,UP:2,DOWN:4};
 exports.directionOffset={vertical:-3,horizontal:-2};
