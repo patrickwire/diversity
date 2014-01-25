@@ -123,7 +123,7 @@ EM.run do
         elsif waitingpool.playercount < 2
           socket.send({type: "NotEnoughPlayers"})
         else
-          game = Game.new(waitingpool.values)
+          game = Game.new(waitingpool.players)
           waitingpool.clear
         end
       elsif not game
