@@ -10,8 +10,9 @@ exports.Player = function(position,view) {
             rect.left=spawnpoint[0];
             rect.top=spawnpoint[1];
         }
-    }
+    };
     var ticks=0;
+    this.id = function() {return state.server.ourId;};
     this.view=view;
     this.bullets = [];
     this.directionX = 0;

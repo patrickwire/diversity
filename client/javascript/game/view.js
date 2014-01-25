@@ -26,6 +26,11 @@ exports.View = function(display) {
             case "PlayerStatus":
                 this.addOrUpdateOtherPlayer(message);
                 break;
+            case "Hit":
+                if (message.playerId === player.id()) {
+                    alert("I got hit!");
+                }
+                break;
             default:
                 alert("unknown message");
                 throw "unknown message";
@@ -53,8 +58,13 @@ exports.View = function(display) {
         var dt =0.06;
 
         player.update(dt);
-        $.each(player.bullets, function( index, value ) {
-            this.update(dt);
+        $.each(player.bullets, function( index, bullet ) {
+            bullet.update(dt);
+            if (bullet.visible) {
+                $.each(otherPlayers, function(opIdx, other) {
+                    other.checkHit(bullet);
+                });
+            }
         });
 
         display.clear();

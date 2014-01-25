@@ -17,10 +17,10 @@ exports.Bullet=function(start,target,currentLayer) {
     }else{
         this.speed=0;
     }
+    // generate a uuid
+    this.id = guid();
     //Spawn
     this.rect = new gamejs.Rect([start[0],start[1]], this.size);
-    gamejs.log(start);
-    gamejs.log(this.rect);
     this.update = function(dt) {
         //Movement
         if(this.directionX!= NaN || this.directionY!=NAN){
@@ -39,8 +39,8 @@ exports.Bullet=function(start,target,currentLayer) {
     };
 
     this.draw = function(display) {
-       // gamejs.log(this.rect);
-        if (this.visible)
-        display.blit(this.image, this.rect);
+        if (this.visible) {
+          display.blit(this.image, this.rect);
+        }
     };
-}
+};

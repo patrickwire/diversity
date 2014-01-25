@@ -7,6 +7,19 @@ exports.Other = function(id, position, mood) {
   var rect = new gamejs.Rect(position, this.image.getSize());
   this.mood = mood;
   this.bullets=new Array();
+
+  this.checkHit = function(bullet) {
+    if (rect.collideRect(bullet.rect)) {
+      state.server.connection.send(JSON.stringify({
+        type: "Hit",
+        playerId: this.id,
+        bulletId: bullet.id
+      }));
+      bullet.visible = false;
+    }
+    return true;
+  };
+
   this.draw = function(display) {
     display.blit(this.image, rect);
   };
