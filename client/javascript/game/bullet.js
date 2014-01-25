@@ -2,53 +2,36 @@ var state = require('gamestate');
 var constants = require('constants');
 var gamejs = require('gamejs');
 
-function Bullet(start,target) {
+exports.Bullet=function(start,target,currentLayer) {
+    this.visible=true;
+    this.currentLayer=currentLayer;
     this.image = gamejs.image.load(constants.graphics.bullet);
     this.size = this.image.getSize();
-
-    this.speed = speed;
-    this.directionX = player.directionX;
-
+    this.directionX=target[0]-start[0];
+    this.directionY=target[1]-start[1];
+    var scalar=Math.sqrt(this.directionX*this.directionX+this.directionY*this.directionY);
+    this.directionX/=scalar;
+    this.directionY/=scalar;
+    this.speed = constants.bullet.speed;
     //Spawn
-    if (this.directionX > 0) {
-        this.rect = new gamejs.Rect([player.rect.right, player.rect.center[1]], this.size);
-    }
-    else {
-        this.rect = new gamejs.Rect([player.rect.left, player.rect.center[1]], this.size);
-    }
-
+    this.rect = new gamejs.Rect([start[0],start[1]], this.size);
     this.update = function(dt) {
-
-        //Collision
-        gamejs.sprite.spriteCollide(this, enemies, false).forEach(function(collision) {
-            collision.b.damageBy(collision.a.damage);
-            collision.a.kill();
-
-            if (player.directionX > 0) {
-                collision.b.push(PUSH_X / 2, 0);
-            }
-            else {
-                collision.b.push(PUSH_X / 2, 0);
-            }
-        });
-
         //Movement
         var x = this.directionX * this.speed * dt;
-        if (map.canMove4(this, x, 0)) {
-            map.move(this, x, 0);
-        }
-        else {
-            this.kill();
-        }
-
-        //Disappear
-        this.existingTime += dt;
-        if (this.existingTime >= this.lifeTime) {
-            this.kill();
+        var y = this.directionY * this.speed * dt;
+        var newRect = new gamejs.Rect(this.rect);
+        newRect.top = this.rect.top+y;
+        newRect.left = this.rect.left+x;
+        //Move, if we are still inside the screen afterwards
+        if (this.currentLayer.isWalkablePosition(newRect)) {
+            this.rect = newRect;
+        }else{
+            this.visible=false;
         }
     };
 
     this.draw = function(display) {
+        if (this.visible)
         display.blit(this.image, this.rect);
     };
 }

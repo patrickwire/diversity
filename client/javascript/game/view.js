@@ -11,35 +11,48 @@ exports.View = function(display) {
         RIGHT:false,
         UP:false,
         DOWN:false
-    };
-    var player = new Player([4,4]);
+    }
+    var player = new Player([1,1]);
 
     var drawBackground = function() {
         player.currentLayer.draw(state.display);
     };
 
     this.onTick = function() {
-        player.update(0.06);
-
+        var dt =0.06;
+        player.update(dt);
+        $.each(player.bullets, function( index, value ) {
+            this.update(dt);
+        });
         display.clear();
         drawBackground();
         player.draw(state.display);
+        $.each(player.bullets, function( index, value ) {
+            this.draw(display);
+        });
     };
 
     this.onEvent = function(event) {
+        if (event.type === gamejs.event.MOUSE_UP) {
+            player.shot(event.pos);
+        }
         if (event.type === gamejs.event.KEY_UP) {
             if (event.key === gamejs.event.K_LEFT) {
                 keys.LEFT=false;
-                player.directionX+=1;}
+                player.directionX+=1;
+            }
             if (event.key === gamejs.event.K_RIGHT) {
                 keys.RIGHT=false;
-                player.directionX-=1;}
+                player.directionX-=1;
+            }
             if (event.key === gamejs.event.K_UP) {
                 keys.UP=false;
-                player.directionY+=1;}
+                player.directionY+=1;
+            }
             if (event.key === gamejs.event.K_DOWN) {
                 keys.DOWN = false;
-                player.directionY-=1;}
+                player.directionY-=1;
+            }
         }
         if (event.type === gamejs.event.KEY_DOWN) {
             if (event.key === gamejs.event.K_LEFT && !keys.LEFT) {
