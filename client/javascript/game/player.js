@@ -6,7 +6,7 @@ var util = require('util');
 var graphicsDB = require('graphicsDB');
 
 exports.Player = function(position,view) {
-
+    var ticks=1;
     this.spawn=function(){
         var spawnpoint=this.currentLayer.findObject(constants.spawnTiles);
         if(spawnpoint!==undefined){
