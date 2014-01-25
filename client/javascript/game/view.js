@@ -13,9 +13,14 @@ exports.View = function(display) {
         DOWN:false
     };
     var player = new Player([1,1]);
+    player.publishPosition();
 
     var drawBackground = function() {
         player.currentLayer.draw(state.display);
+    };
+
+    state.server.onmessage = function(message) {
+        debugger;
     };
 
     this.onTick = function() {

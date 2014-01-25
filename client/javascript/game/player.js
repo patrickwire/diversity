@@ -43,4 +43,14 @@ exports.Player = function(position,view) {
         var bull=new Bullet(start,target,this.currentLayer);
         this.bullets.push(bull);
     };
+
+    this.publishPosition = function() {
+        state.server.connection.send(JSON.stringify({
+            type: "PlayerStatus",
+            id: state.server.ourId,
+            position: [rect.left, rect.top],
+            mood: "funny",
+            bullets: []
+        }));
+    };
 };

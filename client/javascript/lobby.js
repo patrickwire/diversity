@@ -8,9 +8,8 @@ exports.View = function(display) {
   var numPlayers;
   var ourID;
 
-  var connection = new WebSocket('ws://' + window.location.hostname + ':8080');
-  connection.onopen = function() {console.log("onopen");};
-  connection.onmessage = function(message) {
+  state.server.connect();
+  state.server.onmessage = function(message) {
     var data = JSON.parse(message.data);
     console.log(message.data);
     switch (data.type) {
@@ -32,8 +31,6 @@ exports.View = function(display) {
         alert("Unknown message");
     }
   };
-  connection.onclose = function() {throw "connection should not be closed";};
-  connection.onerror = function() {throw "errors should not occur";};
 
   this.onTick = function() {
     display.clear();
@@ -55,7 +52,7 @@ exports.View = function(display) {
     if (event.type === gamejs.event.KEY_DOWN &&
         event.key === gamejs.event.K_ENTER) {
       if (numPlayers >= 2) {
-        connection.send(JSON.stringify({type: "StartGame"}));
+        state.server.connection.send(JSON.stringify({type: "StartGame"}));
       }
     }
   };
