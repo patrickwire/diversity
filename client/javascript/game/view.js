@@ -1,15 +1,18 @@
 var gamejs = require('gamejs');
 var Player = require('game/player').Player;
-
-var player;
+var LayerView = require('layerView').LayerView;
+var state = require('gamestate');
 
 exports.View = function(display) {
-    player = new Player();
+    var player = new Player();
+
+    var drawBackground = function() {
+        player.currentLayerView.draw(state.display);
+    };
 
     this.onTick = function() {
         display.clear();
-        display.blit((new gamejs.font.Font('30px Sans-serif')).render('DA GAME'));
-        //drawBackground();
+        drawBackground();
     };
 
     this.onEvent = function(event) {};
