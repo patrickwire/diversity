@@ -4,7 +4,8 @@ var gamejs = require('gamejs');
 log="";
 exports.Player = function(position) {
 
-    this.direction = 0;
+    this.directionX = 0;
+    this.directionY = 0;
     this.image = gamejs.image.load(constants.graphics.player);
     this.rect = new gamejs.Rect(position, this.image.getSize());
     this.layers = state.mapDB.getRandomLayers(constants.mapsPerPlayer);
@@ -15,15 +16,11 @@ exports.Player = function(position) {
     this.update = function(dt) {
 
         //Calculate new position
-        if(this.direction!=0){
-            var amountX =
-                (this.direction%2 *
-                    (this.direction+constants.directionOffset.horizontal)) * constants.player.speed * dt;
+
+            var amountX =this.directionX * constants.player.speed * dt;
             var newLeft = this.rect.left + amountX;
-            var amountY = ((1+this.direction)%2 *
-                (this.direction+constants.directionOffset.vertical)) * constants.player.speed * dt;
+            var amountY = this.directionY * constants.player.speed * dt;
             var newTop = this.rect.top + amountY;
-            log=amountX+' '+amountY+' '+this.direction
             //Move, if we are still inside the screen afterwards
             if (newLeft > 0 && newLeft + this.rect.width < constants.map.width) {
                 this.rect.moveIp(amountX, 0);
@@ -31,6 +28,6 @@ exports.Player = function(position) {
             if (newTop > 0 && newTop + this.rect.height < constants.map.height) {
                 this.rect.moveIp(0,amountY);
             }
-        }
+
     };
 };
