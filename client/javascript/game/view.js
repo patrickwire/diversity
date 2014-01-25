@@ -11,11 +11,16 @@ exports.View = function(display) {
         RIGHT:false,
         UP:false,
         DOWN:false
-    }
+    };
     var player = new Player([1,1]);
+    player.publishPosition();
 
     var drawBackground = function() {
         player.currentLayer.draw(state.display);
+    };
+
+    state.server.onmessage = function(message) {
+        debugger;
     };
 
     this.onTick = function() {

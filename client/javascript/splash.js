@@ -1,10 +1,18 @@
 var gamejs = require('gamejs');
-var GameView = require('game').View;
+var LobbyView = require('lobby').View;
 var game = require('gamestate');
 
 exports.View = function(display) {
 
+    var timedOut = false;
+
+    setTimeout(function() {timedOut = true;}, 2000);
+
     this.onTick = function() {
+        if (timedOut) {
+            game.loadView(LobbyView);
+        }
+
         display.clear();
         display.blit(
             (new gamejs.font.Font('30px Sans-serif')).render('Five Stages of Killing(tm)')
@@ -12,11 +20,6 @@ exports.View = function(display) {
     };
 
     this.onEvent = function(event) {
-        switch (event.type) {
-            case gamejs.event.MOUSE_DOWN:
-                game.loadView(GameView);
-                break;
-        }
     };
 
     return this;

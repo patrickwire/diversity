@@ -12,14 +12,14 @@ exports.Player = function(position,view) {
         }
     }
     this.view=view;
-    this.bullets=new Array();
+    this.bullets = [];
     this.directionX = 0;
     this.directionY = 0;
     this.image = gamejs.image.load(constants.graphics.player);
     this.layers = state.mapDB.getRandomLayers(constants.mapsPerPlayer);
     this.currentLayer = this.layers[0];
-    rect = new gamejs.Rect(position, this.image.getSize());
-    this.spawn();
+    var rect = new gamejs.Rect(position, this.image.getSize());
+
     this.draw = function(display) {
         display.blit(this.image, rect);
     };
@@ -50,6 +50,15 @@ exports.Player = function(position,view) {
         var start=rect.center;
         var bull=new Bullet(start,target,this.currentLayer);
         this.bullets.push(bull);
-    }
+    };
 
+    this.publishPosition = function() {
+        state.server.connection.send(JSON.stringify({
+            type: "PlayerStatus",
+            id: state.server.ourId,
+            position: [rect.left, rect.top],
+            mood: "funny",
+            bullets: []
+        }));
+    };
 };
