@@ -27,7 +27,8 @@ exports.View = function(display) {
                 break;
             case "Hit":
                 if (message.playerId === player.id()) {
-                    alert("I got hit!");
+                    player.hitpoints -= 1;
+                    console.log(player.hitpoints + " left!");
                 }
                 break;
             default:

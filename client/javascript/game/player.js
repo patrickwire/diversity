@@ -14,6 +14,7 @@ exports.Player = function(position,view) {
     this.id = function() {return state.server.ourId;};
     this.view=view;
     this.bullets = [];
+    this.hitpoints = constants.player.startingHitpoints;
     this.directionX = 0;
     this.directionY = 0;
     this.image = gamejs.image.load(constants.graphics.player);
