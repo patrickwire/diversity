@@ -1,6 +1,6 @@
 var gamejs = require('gamejs');
 var Player = require('game/player').Player;
-var LayerView = require('layerView').LayerView;
+var Layer = require('layer').Layer;
 var state = require('gamestate');
 var constants = require('constants');
 
@@ -10,7 +10,7 @@ exports.View = function(display) {
     var player = new Player([1,1]);
 
     var drawBackground = function() {
-        player.currentLayerView.draw(state.display);
+        player.currentLayer.draw(state.display);
     };
 
     this.onTick = function() {

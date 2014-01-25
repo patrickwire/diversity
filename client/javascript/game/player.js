@@ -7,8 +7,8 @@ exports.Player = function(position) {
     this.direction = 0;
     this.image = gamejs.image.load(constants.graphics.player);
     this.rect = new gamejs.Rect(position, this.image.getSize());
-    this.layerViews = state.mapDB.getRandomLayerViews(constants.mapsPerPlayer);
-    this.currentLayerView = this.layerViews[0];
+    this.layers = state.mapDB.getRandomLayers(constants.mapsPerPlayer);
+    this.currentLayer = this.layers[0];
     this.draw = function(display) {
         display.blit(this.image, this.rect);
     };

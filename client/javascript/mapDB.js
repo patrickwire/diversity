@@ -1,11 +1,11 @@
 var tmx = require('gamejs/tmx');
-var LayerView = require('layerView').LayerView;
+var Layer = require('layer').Layer;
 
 exports.MapDB = function(tmxUrl) {
     var map = tmx.Map(tmxUrl);
 
-    var layerViews = map.layers.map(function(layer) {
-      return new LayerView(layer, {
+    var layers = map.layers.map(function(layer) {
+      return new Layer(layer, {
          tileWidth: map.tileWidth,
          tileHeight: map.tileHeight,
          width: map.width,
@@ -14,12 +14,12 @@ exports.MapDB = function(tmxUrl) {
       });
    });
 
-    this.getRandomLayerViews = function(count) {
+    this.getRandomLayers = function(count) {
         if (count > map.layers.length) {
             throw "not enough layers";
         }
 
-        var views = layerViews.slice(0);
+        var views = layer.slice(0);
         var ret = [];
 
         while (count-- > 0) {
