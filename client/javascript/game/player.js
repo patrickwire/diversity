@@ -10,7 +10,7 @@ exports.Player = function(position,view) {
             rect.left=spawnpoint[0];
             rect.top=spawnpoint[1];
         }
-    }
+    };
     this.view=view;
     this.bullets = [];
     this.directionX = 0;

@@ -31,7 +31,8 @@ exports.Bullet=function(start,target,currentLayer) {
     };
 
     this.draw = function(display) {
-        if (this.visible)
-        display.blit(this.image, this.rect);
+        if (this.visible) {
+          display.blit(this.image, this.rect);
+        }
     };
-}
+};
