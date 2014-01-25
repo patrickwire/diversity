@@ -45,8 +45,13 @@ exports.View = function(display) {
         var dt =0.06;
 
         player.update(dt);
-        $.each(player.bullets, function( index, value ) {
-            this.update(dt);
+        $.each(player.bullets, function( index, bullet ) {
+            bullet.update(dt);
+            if (bullet.visible) {
+                $.each(otherPlayers, function(opIdx, other) {
+                    other.checkHit(bullet);
+                });
+            }
         });
 
         display.clear();
