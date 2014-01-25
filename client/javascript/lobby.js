@@ -9,9 +9,7 @@ exports.View = function(display) {
   var ourID;
 
   state.server.connect();
-  state.server.onmessage = function(message) {
-    var data = JSON.parse(message.data);
-    console.log(message.data);
+  state.server.onmessage = function(data) {
     switch (data.type) {
       case "RegistrationSuccessful":
         registered = true;
