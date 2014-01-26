@@ -40,7 +40,16 @@ exports.View = function(display,realdisplay) {
                         player.switchMood("denial");
                         $('.hp-display').empty();
                         player.hitpoints = constants.player.startingHitpoints;
+                        state.server.connection.send(JSON.stringify({
+                            type: "Kill",
+                            killerId: message.playerId
+                        }));
                     }
+                }
+                break;
+            case "Kill":
+                if (player.mood === "anger") {
+                    player.winMood();
                 }
                 break;
             default:
@@ -94,6 +103,8 @@ exports.View = function(display,realdisplay) {
                 this.draw(display);
             });
         });
+
+        player.checkSadnessWin(otherPlayers);
 
         $.each(player.bullets, function( index, value ) {
             this.draw(display);
