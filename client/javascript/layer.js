@@ -98,6 +98,21 @@ exports.Layer = function(layer, opts, map, mood) {
        });
    };
 
+    this.isFinalPosition = function(rect) {
+        var overlappingArea = this.getOverlappingArea(rect);
+        return overlappingArea.some(function(row) {
+            return row.some(function(tile) {
+                var p;
+                var properties = map.tiles.getProperties(tile.gid);
+                for (p in properties) {
+                    if(properties.hasOwnProperty(p) && p === "finalFinish") {
+                        return true;
+                    }
+                }
+            });
+        });
+    };
+
    this.surface = new gamejs.Surface(opts.width * opts.tileWidth, opts.height * opts.tileHeight);
    this.surface.setAlpha(layer.opacity);
 

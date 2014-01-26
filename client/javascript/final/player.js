@@ -4,6 +4,7 @@ var gamejs = require('gamejs');
 var Bullet = require('game/bullet').Bullet;
 var util = require('util');
 var MapDB = require('mapDB').MapDB;
+var Outro = require('outro').View;
 
 var graphicsDB = require('graphicsDB');
 
@@ -59,7 +60,9 @@ exports.Player = function(position,view) {
             rect = newRect;
             justHitWall = false;
         }
-
+        if (this.currentLayer.isFinalPosition(newRect)) {
+            state.loadView(Outro);
+        }
 
     };
 

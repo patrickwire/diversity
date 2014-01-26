@@ -20,7 +20,7 @@ exports.View = function(display,realdisplay) {
         );
         realdisplay.clear();
         //realdisplay.blit(display,[0,0],new gamejs.Rect([0,0], [992, 992]));
-        var image = gamejs.image.load(constants.graphics.splash);
+        var image = gamejs.image.load(constants.graphics.outro);
         var surface = new gamejs.Surface(600, 360);
         surface.blit(image, [0, 0]);
         realdisplay.blit(surface, [0,0]);
