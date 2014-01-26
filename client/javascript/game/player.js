@@ -66,6 +66,9 @@ exports.Player = function(position,view) {
         newRect.left = newLeft;
         //Move, if we are still inside the screen afterwards
         if (this.currentLayer.isFallablePosition(newRect)) {
+            if (this.mood === 'fear') {
+                this.winMood();
+            }
             this.switchMood('confusion');
         } else if (this.currentLayer.isWalkablePosition(newRect)) {
             rect = newRect;
@@ -120,5 +123,26 @@ exports.Player = function(position,view) {
         this.currentLayer = this.layers[mood];
         this.image = graphicsDB.getPlayerIconForMood(mood);
         this.spawn();
+        console.log("now in mood " + this.mood);
+    };
+
+    var wonMoods = {};
+    constants.moods.forEach(function(mood) {wonMoods[mood] = false;});
+
+    this.winMood = function() {
+        if (wonMoods[this.mood]) {
+            return;
+        }
+        console.log("won " + this.mood);
+        wonMoods[this.mood] = true;
+        var allWon = true;
+        constants.moods.forEach(function(mood) {
+            if (!wonMoods[mood]) {
+                allWon = false;
+            }
+        });
+        if (allWon) {
+            alert("HAPPY!HAPPY!HAPPY!");
+        }
     };
 };
