@@ -87,7 +87,13 @@ exports.Layer = function(layer, opts, map, mood) {
        var overlappingArea = this.getOverlappingArea(rect);
        return overlappingArea.some(function(row) {
            return row.some(function(tile) {
-               return tile.finishDenial;
+               var p;
+               var properties = map.tiles.getProperties(tile.gid);
+               for (p in properties) {
+                   if(properties.hasOwnProperty(p) && p === "finishDenial") {
+                       return true;
+                   }
+               }
            });
        });
    };
@@ -107,10 +113,12 @@ exports.Layer = function(layer, opts, map, mood) {
            if (!tileSurface) {throw "this shouldnt happen";}
            this.tiles[i][j] = {
                position: [j * opts.tileWidth, i * opts.tileHeight],
+               gid: gid,
                rect: new gamejs.Rect([j * opts.tileWidth, i * opts.tileHeight],
                                      [opts.tileWidth, opts.tileHeight]),
                walkable: that.getTileProperty(gid,constants.walkableTiles),
                fallable: that.getTileProperty(gid,constants.fallableTiles)
+
            };
            this.surface.blit(tileSurface, this.tiles[i][j].rect);
       }, this);
