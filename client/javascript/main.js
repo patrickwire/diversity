@@ -1,5 +1,5 @@
 require('preload');
-
+HACK=''
 var gamejs = require('gamejs');
 var SplashView = require('splash').View;
 var state = require('gamestate');

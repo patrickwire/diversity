@@ -20,7 +20,7 @@ exports.View = function(display,realdisplay) {
 
     var drawBackground = function() {
         var offset=player.getPos();
-        gamejs.log(offset);
+
         player.currentLayer.draw(state.display,offset);
     };
 

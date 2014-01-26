@@ -24,4 +24,20 @@ exports.MapDB = function() {
     this.getLayerForMood = function(mood) {
         return layersByMood[mood][Math.floor(Math.random() * layersByMood[mood].length)];
     };
+    this.getHappyLevel=function(){
+        var map = new tmx.Map(constants.tmxHappyLevel);
+
+        return new Layer(
+            map.layers[0],
+            { tileWidth: map.tileWidth,
+                tileHeight: map.tileHeight,
+                width: map.width,
+                height: map.height,
+                tiles: map.tiles
+            },
+            map,
+            'happy'
+        );
+
+    };
 };

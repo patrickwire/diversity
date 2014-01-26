@@ -39,6 +39,8 @@ exports.tmxFiles = {
         "./data/denial2.tmx"
     ]
 };
+
+exports.tmxHappyLevel = "./data/final.tmx";
 exports.walkableTiles = "walkable";
 exports.fallableTiles = "fallable";
 exports.spawnTiles = "spawn";
@@ -47,6 +49,7 @@ exports.mapsPerPlayer = 2;
 exports.graphics = {
     player:PATH.IMG + 'player.png',
     vignette:PATH.IMG + 'vignette.png',
+    vignette_w:PATH.IMG + 'vignette_w.png',
     splash:PATH.IMG + 'splash.png',
     intro:PATH.IMG + 'intro.png',
     outro:PATH.IMG + 'outro.png'
@@ -57,7 +60,8 @@ exports.moodGraphicsOrder = {
     fear: 1,
     sadness: 2,
     confusion: 3,
-    denial: 4
+    denial: 4,
+    happy: 5
 };
 exports.moodColors = {
     anger: "red",

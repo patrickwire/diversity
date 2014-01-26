@@ -4,6 +4,7 @@ var gamejs = require('gamejs');
 var Bullet = require('game/bullet').Bullet;
 var util = require('util');
 var graphicsDB = require('graphicsDB');
+var Final = require('final').View;
 
 exports.Player = function(position,view) {
     var ticks=1;
@@ -188,8 +189,10 @@ exports.Player = function(position,view) {
             }
         });
         $('.win-display').append('<img src="graphics/star_' + this.mood + '.png" />');
-        if (allWon) {
-            alert("HAPPY!HAPPY!HAPPY!");
+        if (true) {
+            state.loadView(Final);
+            state.server.onclose=function(){};
+            state.server.connection.close();
         }
     };
 
