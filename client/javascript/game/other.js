@@ -32,7 +32,7 @@ exports.Other = function(id, position, mood) {
     rect.top = data.position[1];
     if (data.mood !== this.mood) {
       this.mood = data.mood;
-      this.image = gamejs.image.load(constants.graphics.player);
+      this.image = graphicsDB.getPlayerIconForMood(data.mood);
     }
   };
 };
