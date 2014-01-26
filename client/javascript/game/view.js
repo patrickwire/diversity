@@ -35,7 +35,7 @@ exports.View = function(display) {
                     if (player.hitpoints === 1) {
                         player.switchMood("fear");
                     } else if (player.hitpoints === 0) {
-                        player.switchMood("sadness");
+                        player.switchMood("denial");
                         $('.hp-display').empty();
                         player.hitpoints = constants.player.startingHitpoints;
                     }
