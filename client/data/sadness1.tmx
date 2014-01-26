@@ -16,6 +16,7 @@
   <tile id="139">
    <properties>
     <property name="spawn" value="1"/>
+    <property name="walkable" value="1"/>
    </properties>
   </tile>
  </tileset>
