@@ -65,7 +65,7 @@ exports.Player = function(position,view) {
         var bull=[];
         $(this.bullets).each(function(){
            if(this.visible){
-               bull.push({x:this.rect.left,y:this.rect.top,directionX:this.directionX,directionY:this.directionY})
+               bull.push({x:this.rect.left,y:this.rect.top,directionX:this.directionX,directionY:this.directionY});
            }
         });
         state.server.connection.send(JSON.stringify({

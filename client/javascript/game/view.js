@@ -47,8 +47,6 @@ exports.View = function(display) {
             otherPlayers[data.id] = new Other(data.id, data.position, data.mood);
         }
         otherPlayers[data.id].bullets=[];
-        gamejs.log(data);
-        gamejs.log(data.bullets);
         for (i in data.bullets){
             var bull = new Bullet([data.bullets[i].x,data.bullets[i].y],[data.bullets[i].x,data.bullets[i].y],player.currentLayer);
             otherPlayers[data.id].bullets.push(bull);
