@@ -75,7 +75,7 @@ exports.Layer = function(layer, opts, map, mood) {
                var p;
                var properties = map.tiles.getProperties(tile.gid);
                for (p in properties) {
-                   if(properties.hasOwnProperty(p) && p === "finishFear") {
+                   if(properties.hasOwnProperty(p) && p === "fearFinish") {
                        return true;
                    }
                }
