@@ -32,6 +32,7 @@ exports.View = function(display,realdisplay) {
             case "Hit":
                 if (message.playerId === player.id()) {
                     player.hitpoints -= 1;
+                    player.lastHit =0;
                     $('.hp-display').append(
                         '<span style="color: ' + constants.moodColors[message.bulletMood] + '">•</span>'
                         );

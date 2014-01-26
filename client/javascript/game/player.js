@@ -7,6 +7,7 @@ var graphicsDB = require('graphicsDB');
 
 exports.Player = function(position,view) {
     var ticks=1;
+    this.lastHit=2;
     this.spawn=function(){
         var spawnpoint = this.currentLayer.findObject(constants.spawnTiles);
 
@@ -34,6 +35,7 @@ exports.Player = function(position,view) {
     var rect = new gamejs.Rect(position, [24, 24]);
     this.spawn();
     this.draw = function(display) {
+        if(this.lastHit<0.5||this.lastHit>1)
         display.blit(this.image, [rect.left - 4, rect.top - 4]);
     };
 
@@ -48,7 +50,7 @@ exports.Player = function(position,view) {
         var newLeft = rect.left + amountX;
         var amountY = this.directionY * constants.player.speed * dt;
         var newTop = rect.top + amountY;
-
+        this.lastHit += dt;
         if (amountX === 0 && amountY === 0) {
             if (sadnessTimer === null) {
                 sadnessTimer = setTimeout(
@@ -100,7 +102,7 @@ exports.Player = function(position,view) {
         if (this.bullets.length >= constants.player.maxBullets) {
             return;
         }
-        debugger;
+
         if (sadnessTimer !== null) {
             clearTimeout(sadnessTimer);
             sadnessTimer = null;
