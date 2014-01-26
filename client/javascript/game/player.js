@@ -97,7 +97,10 @@ exports.Player = function(position,view) {
         if (this.bullets.length >= constants.player.maxBullets) {
             return;
         }
-
+        if (sadnessTimer !== null) {
+            clearTimeout(sadnessTimer);
+            sadnessTimer = null;
+        }
         var start = rect.center;
         var bull = new Bullet(start, target, this);
         this.bullets.push(bull);
@@ -123,8 +126,10 @@ exports.Player = function(position,view) {
         wallhitcount = 0;
         justHitWall = false;
 
-        clearTimeout(sadnessTimer);
-        sadnessTimer = null;
+        if (sadnessTimer !== null) {
+            clearTimeout(sadnessTimer);
+            sadnessTimer = null;
+        }
 
         this.mood = mood;
         this.currentLayer = this.layers[mood];
