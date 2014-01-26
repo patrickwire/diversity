@@ -37,7 +37,8 @@ exports.player={
     speed:20,
     startingHitpoints: 3,
     maxBullets: 3,
-    wallhitsTillAnger: 4
+    wallhitsTillAnger: 4,
+    millisecondsTillSadness: 10000
 };
 exports.bullet={
     speed:20

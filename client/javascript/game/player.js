@@ -40,13 +40,28 @@ exports.Player = function(position,view) {
     var wallhitcount = 0;
     var justHitWall = false;
 
-    this.update = function(dt) {
+    var sadnessTimer = null;
 
+    this.update = function(dt) {
         //Calculate new position
         var amountX =this.directionX * constants.player.speed * dt;
         var newLeft = rect.left + amountX;
         var amountY = this.directionY * constants.player.speed * dt;
         var newTop = rect.top + amountY;
+
+        if (amountX === 0 && amountY === 0) {
+            if (sadnessTimer === null) {
+                console.log("setting timeout");
+                sadnessTimer = setTimeout(
+                    $.proxy(function() {console.log("timeout triggered"); this.switchMood('sadness');}, this),
+                    constants.player.millisecondsTillSadness
+                );
+            }
+        } else if (sadnessTimer !== null) {
+            console.log("clearing timeout");
+            clearTimeout(sadnessTimer);
+            sadnessTimer = null;
+        }
 
         var newRect = new gamejs.Rect(rect);
         newRect.top = newTop;
