@@ -7,7 +7,7 @@ exports.Other = function(id, position, mood) {
   this.id = id;
   var rect = new gamejs.Rect(position, [24, 24]);
   this.mood = mood;
-  this.bullets=new Array();
+  this.bullets = [];
   this.image = graphicsDB.getPlayerIconForMood(this.mood);
 
   this.checkHit = function(bullet) {

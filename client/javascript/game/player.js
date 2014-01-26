@@ -49,7 +49,7 @@ exports.Player = function(position,view) {
            this.currentLayer = this.layers[Math.floor(Math.random()*this.layers.length%this.layers.length)];
             this.spawn();
         }
-        if(ticks%2===0) {
+        if (ticks % 2 === 0) {
             this.publishPosition();
         }
         ticks++;

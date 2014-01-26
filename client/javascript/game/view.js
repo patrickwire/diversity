@@ -26,13 +26,13 @@ exports.View = function(display) {
             case "PlayerStatus":
                 this.addOrUpdateOtherPlayer(message);
                 break;
-                case "Hit":
+            case "Hit":
                 if (message.playerId === player.id()) {
                     player.hitpoints -= 1;
                     console.log(player.hitpoints + " left!");
                     $('.hp-display').append(
                         '<span style="color: ' + constants.moodColors[message.bulletMood] + '">•</span>'
-                    );
+                        );
                 }
                 break;
             default:
@@ -44,6 +44,7 @@ exports.View = function(display) {
     var otherPlayers = {};
 
     this.addOrUpdateOtherPlayer = function(data) {
+        var i;
         if (otherPlayers[data.id]) {
             otherPlayers[data.id].update(data);
         } else {
@@ -51,8 +52,14 @@ exports.View = function(display) {
         }
         otherPlayers[data.id].bullets=[];
         for (i in data.bullets){
-            var bull = new Bullet([data.bullets[i].x,data.bullets[i].y],[data.bullets[i].x,data.bullets[i].y],player.currentLayer);
-            otherPlayers[data.id].bullets.push(bull);
+            if (data.bullets.hasOwnProperty(i)) {
+                var bull = new Bullet(
+                    [data.bullets[i].x,data.bullets[i].y],
+                    [data.bullets[i].x,data.bullets[i].y],
+                    player.currentLayer
+                );
+                otherPlayers[data.id].bullets.push(bull);
+            }
         }
     };
 
