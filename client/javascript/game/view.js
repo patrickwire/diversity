@@ -93,6 +93,8 @@ exports.View = function(display) {
             });
         });
 
+        player.checkSadnessWin(otherPlayers);
+
         $.each(player.bullets, function( index, value ) {
             this.draw(display);
         });

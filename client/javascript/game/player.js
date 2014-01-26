@@ -184,4 +184,20 @@ exports.Player = function(position,view) {
             alert("HAPPY!HAPPY!HAPPY!");
         }
     };
+
+    this.checkSadnessWin = function(others) {
+        if (this.mood !== "sadness" || wonMoods.sadness) {
+            return;
+        }
+
+        var win = Object.keys(others).some(function(otherKey) {
+            var other = others[otherKey];
+            var dist = util.distance(rect.topleft, other.getPosition());
+            return dist <= constants.player.maxDistanceToOthersForSadnessWin;
+        });
+
+        if (win) {
+            this.winMood();
+        }
+    };
 };

@@ -10,3 +10,8 @@ exports.guid = function() {
 exports.randomMood = function() {
   return constants.moods[Math.floor(Math.random() * constants.moods.length)];
 };
+
+exports.distance = function(posA, posB) {
+  var dx = posB[0] - posA[0], dy = posB[1] - posA[1];
+  return Math.sqrt((dx * dx) + (dy * dy));
+};

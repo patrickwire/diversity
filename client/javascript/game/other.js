@@ -27,6 +27,8 @@ exports.Other = function(id, position, mood) {
     display.blit(this.image, [rect.left - 4, rect.top - 4]);
   };
 
+  this.getPosition = function() {return rect.topleft;};
+
   this.update = function(data) {
     rect.left = data.position[0];
     rect.top = data.position[1];

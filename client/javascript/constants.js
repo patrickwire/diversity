@@ -45,7 +45,8 @@ exports.player={
     maxBullets: 3,
     wallhitsTillAnger: 10,
     millisecondsTillSadness: 60 * 1000,
-    millisecondsTillConfusionWon: 10 * 1000,
+    millisecondsTillConfusionWon: 10 * 1000, // must be smaller than ..tillSadness
+    maxDistanceToOthersForSadnessWin: 50     // pixels
 };
 exports.bullet={
     speed:20
