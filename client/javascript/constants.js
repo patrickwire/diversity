@@ -36,7 +36,8 @@ exports.directionOffset={vertical:-3,horizontal:-2};
 exports.player={
     speed:20,
     startingHitpoints: 3,
-    maxBullets: 3
+    maxBullets: 3,
+    wallhitsTillAnger: 4
 };
 exports.bullet={
     speed:20
