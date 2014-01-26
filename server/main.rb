@@ -16,80 +16,71 @@ class Player
 end
 
 class Game
+  MAX_PLAYERS = 5
+
   attr_reader :players
 
   def initialize(players)
-    @players = players
+    @players = []
+    players.each do |p|
+      add_player p
+    end
+
+    $games[:with_slots] << self
+  end
+
+  def handle_message(player, message)
     @players.each do |p|
-      LOG.debug("sending #{JSON.generate({type: "GameStarting"})}")
-      p.socket.send JSON.generate({type: "GameStarting"})
+      next if p == player
+      p.socket.send message
     end
   end
 
-  def contains_player_with_socket_id(sockid)
-    players.any? {|p| p.socket.object_id == sockid}
-  end
+  def add_player(player)
+    LOG.debug "Adding player #{player.id}"
+    player.socket.send JSON.generate({type: "GameStarting"})
 
-  def handleMessage(sockid, message)
-    players.each do |p|
-      next if p.socket.object_id == sockid
-      p.socket.send JSON.generate(message)
+    player.socket.onmessage { |m| handle_message(player, m) }
+    player.socket.onclose { remove_player(player) }
+
+    @players << player
+
+    if @players.length == MAX_PLAYERS
+      $games[:with_slots].delete self
+      $games[:full] << self
     end
   end
 
-  def abort
-    players.each do |p|
-      p.socket.send JSON.generate({type: "GameAborted"})
-    end
-  end
-end
+  def remove_player(player)
+    old_player_count = @players.length
 
-class PlayerPool
-  def initialize
-    @players_by_socket_id = {}
-  end
+    return unless @players.delete player
 
-  def <<(player)
-    send_players_waiting_update(@players_by_socket_id.length + 1)
-    @players_by_socket_id[player.socket.object_id] = player
-  end
+    player.socket.close
 
-  def has_socket_id(sockid)
-    @players_by_socket_id.has_key? sockid
-  end
-
-  def playercount
-    @players_by_socket_id.length
-  end
-
-  def players
-    @players_by_socket_id.values
-  end
-
-  def clear
-    @players_by_socket_id.clear
-  end
-
-  def delete_by_socket_id(sockid)
-    @players_by_socket_id.delete(sockid)
-    send_players_waiting_update(@players_by_socket_id.length)
-  end
-
-private
-  def send_players_waiting_update(playercount)
-    @players_by_socket_id.each_value do |p|
-      LOG.debug("sending playerswaitingupdate to #{p.id}")
+    @players.each do |p|
       p.socket.send JSON.generate({
-        type: "PlayersWaitingUpdate",
-        currentPlayersWaiting: playercount
+        type: "PlayerLeft",
+        playerId: player.id
       })
     end
+
+    if @players.length == 0
+      $games[:with_slots].delete self
+    elsif old_player_count == MAX_PLAYERS and @players.length < MAX_PLAYERS
+        $games[:full].delete self
+        $games[:with_slots] << self
+    end
   end
 end
 
-waitingpool = PlayerPool.new
+$games = {
+  full: [],
+  with_slots: []
+}
 
-game = nil
+waitingPlayer = nil;
+
 LOG.debug "FSK Server starting up..."
 
 EM.run do
@@ -98,47 +89,34 @@ EM.run do
     socket.onopen do
       LOG.debug("Client #{socket.object_id} connected")
 
-      if game
-        socket.send JSON.generate({type: "GameAlreadyRunning"})
-        socket.close
-      elsif waitingpool.has_socket_id(socket.object_id)
-        socket.send JSON.generate({type: "AlreadyRegistered"})
+      player = Player.new(socket)
+      socket.send JSON.generate({
+        type: "RegistrationSuccessful",
+        id: player.id,
+      })
+
+      if $games[:with_slots].any?
+        LOG.debug "found game with slot, adding player"
+        $games[:with_slots][0].add_player(player)
+      elsif waitingPlayer
+        LOG.debug "got someone waiting already, starting game"
+        $games[:with_slots] << Game.new([waitingPlayer, player]);
+        waitingPlayer = nil
       else
-        player = Player.new(socket)
-        waitingpool << player
-        socket.send JSON.generate({
-          type: "RegistrationSuccessful",
-          id: player.id,
-          currentPlayersWaiting: waitingpool.playercount
-        })
-        LOG.debug("Assigning id #{player.id}")
+        LOG.debug "queuing player waiting for the next one"
+        waitingPlayer = player
       end
     end
 
     socket.onmessage do |message_json|
       LOG.debug("Got message: \"#{message_json}\"")
-      message = JSON.parse(message_json)
-      if message["type"] == "StartGame"
-        if game
-          socket.send({type: "GameAlreadyRunning"})
-        elsif waitingpool.playercount < 2
-          socket.send({type: "NotEnoughPlayers"})
-        else
-          game = Game.new(waitingpool.players)
-          waitingpool.clear
-        end
-      elsif not game
-        socket.send({type: "GameNotRunning"})
-      else
-        game.handleMessage(socket.object_id, message)
-      end
+      socket.send({type: "GameNotRunning"})
     end
 
     socket.onclose do
-      game.abort if game and game.contains_player_with_socket_id(socket.object_id)
-      game = nil
-
-      waitingpool.delete_by_socket_id(socket.object_id)
+      if waitingPlayer && waitingPlayer.socket.object_id == socket.object_id
+        waitingPlayer = nil
+      end
     end
   end
 end
