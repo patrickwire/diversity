@@ -122,6 +122,10 @@ exports.Player = function(position,view) {
     this.switchMood = function(mood) {
         wallhitcount = 0;
         justHitWall = false;
+
+        clearTimeout(sadnessTimer);
+        sadnessTimer = null;
+
         this.mood = mood;
         this.currentLayer = this.layers[mood];
         this.image = graphicsDB.getPlayerIconForMood(mood);
