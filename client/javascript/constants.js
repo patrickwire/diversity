@@ -5,7 +5,13 @@ PATH = {
 };
 
 exports.tmxTileset = "./data/tiles1.png";
-exports.tmxFile = "./data/rage1.tmx";
+exports.tmxFiles = {
+    anger: "./data/anger1.tmx",
+    fear: "./data/fear1.tmx",
+    sadness: "./data/sadness1.tmx",
+    confusion: "./data/confusion1.tmx",
+    denial: "./data/denial1.tmx"
+};
 exports.walkableTiles = "walkable";
 exports.fallableTiles = "fallable";
 exports.spawnTiles = "spawn";
