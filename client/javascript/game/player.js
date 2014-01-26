@@ -51,14 +51,12 @@ exports.Player = function(position,view) {
 
         if (amountX === 0 && amountY === 0) {
             if (sadnessTimer === null) {
-                console.log("setting timeout");
                 sadnessTimer = setTimeout(
-                    $.proxy(function() {console.log("timeout triggered"); this.switchMood('sadness');}, this),
+                    $.proxy(function() {this.switchMood('sadness');}, this),
                     constants.player.millisecondsTillSadness
                 );
             }
         } else if (sadnessTimer !== null) {
-            console.log("clearing timeout");
             clearTimeout(sadnessTimer);
             sadnessTimer = null;
         }

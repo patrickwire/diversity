@@ -12,7 +12,7 @@ exports.Layer = function(layer, opts,map) {
 
    /** Returns 2-dimensional array of overlapping tiles */
    this.getOverlappingArea = function(rect,offset) {
-       if(offset==undefined){
+       if (offset === undefined){
            offset=0;
        }
        var firstColumn = Math.floor((rect.left + offset) / this.tileWidth);
@@ -29,8 +29,9 @@ exports.Layer = function(layer, opts,map) {
 
     this.getTileProperty = function(id, property){
         var properties = map.tiles.getProperties(id);
+        var p;
         for (p in properties) {
-            if (p === property) {
+            if (properties.hasOwnProperty(p) && p === property) {
                 return true;
             }
         }
@@ -51,19 +52,21 @@ exports.Layer = function(layer, opts,map) {
        });
        return !invalid;
    };
-    this.isFallablePosition = function(rect) {
-        if (rect.top < 0 || rect.bottom > constants.map.height ||
-            rect.left < 0 || rect.right > constants.map.width){
-            return false;
-        }
-        var overlappingArea = this.getOverlappingArea(rect,10);
-        var invalid = overlappingArea.some(function(row) {
-            return row.some(function(tile) {
-                return !tile.fallable;
-            });
-        });
-        return !invalid;
-    };
+
+   this.isFallablePosition = function(rect) {
+       if (rect.top < 0 || rect.bottom > constants.map.height ||
+               rect.left < 0 || rect.right > constants.map.width){
+                   return false;
+               }
+       var overlappingArea = this.getOverlappingArea(rect,10);
+       var invalid = overlappingArea.some(function(row) {
+           return row.some(function(tile) {
+               return !tile.fallable;
+           });
+       });
+       return !invalid;
+   };
+
 
    this.surface = new gamejs.Surface(opts.width * opts.tileWidth, opts.height * opts.tileHeight);
    this.surface.setAlpha(layer.opacity);
@@ -88,19 +91,19 @@ exports.Layer = function(layer, opts,map) {
            this.surface.blit(tileSurface, this.tiles[i][j].rect);
       }, this);
    }, this);
-    this.findObject = function(property) {
 
-        for (var y = 0; y < map.height; y++) {
-            for (var x = 0; x < map.width; x++) {
-
-                var properties = map.tiles.getProperties(layer.gids[y][x]);
-                for (p in properties) {
-                    if(p==property)
-                        return ([x * map.tileWidth, y * map.tileHeight]);
-                }
-            }
-        }
-    }
-   return this;
+   this.findObject = function(property) {
+       var x, y, p;
+       for (y = 0; y < map.height; y++) {
+           for (x = 0; x < map.width; x++) {
+               var properties = map.tiles.getProperties(layer.gids[y][x]);
+               for (p in properties) {
+                   if(properties.hasOwnProperty(p) && p === property) {
+                       return ([x * map.tileWidth, y * map.tileHeight]);
+                   }
+               }
+           }
+       }
+   };
 };
 
