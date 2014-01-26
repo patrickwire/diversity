@@ -86,8 +86,8 @@ exports.Player = function(position,view) {
 
     this.switchMood = function(mood) {
         this.mood = mood;
-        this.currentLayer = this.layers.confusion;
-        this.spawn();
+        this.currentLayer = this.layers[mood];
         this.image = graphicsDB.getPlayerIconForMood(mood);
+        this.spawn();
     };
 };
