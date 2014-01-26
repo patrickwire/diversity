@@ -1,6 +1,8 @@
 var gamejs = require('gamejs');
 var GameView = require('game').View;
+var IntroView = require('intro').View;
 var state = require('gamestate');
+var constants =require('constants');
 
 exports.View = function(display,realdisplay) {
 
@@ -23,7 +25,7 @@ exports.View = function(display,realdisplay) {
         alert("Game is already running, sorry");
         break;
       case "GameStarting":
-        state.loadView(GameView);
+        state.loadView(IntroView);
         break;
       default:
         alert("Unknown message");
@@ -34,17 +36,21 @@ exports.View = function(display,realdisplay) {
     display.clear();
 
     if (!registered) {
-      display.blit((new gamejs.font.Font('30px Sans-serif')).render('Registering at server'));
+      display.blit((new gamejs.font.Font('30px Sans-serif')).render('Registering at server',"rgba(255,255,255,1)"));
     } else {
       var message = 'Waiting for other players...';
       if (numPlayers > 1) {
-        display.blit((new gamejs.font.Font('20px Sans-serif')).render("Press enter to start"), [50, 50]);
+        //display.blit((new gamejs.font.Font('20px Sans-serif')).render("Press enter to start","rgba(255,255,255,1)"), [50, 50]);
         message += " (" + numPlayers + " in Pool)";
       }
-      display.blit((new gamejs.font.Font('30px Sans-serif')).render(message));
+      display.blit((new gamejs.font.Font('30px Sans-serif')).render(message,"rgba(255,255,255,1)"));
 
     }
       realdisplay.clear();
+      var image = gamejs.image.load(constants.graphics.splash);
+      var surface = new gamejs.Surface(600, 360);
+      surface.blit(image, [0, 0]);
+      realdisplay.blit(surface, [0,0]);
       realdisplay.blit(display,[0,0],new gamejs.Rect([0,0], [992, 992]));
   };
 

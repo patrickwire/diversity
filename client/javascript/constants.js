@@ -20,7 +20,10 @@ exports.mapsPerPlayer = 2;
 exports.graphics = {
     player:PATH.IMG + 'player.png',
     bullet:PATH.IMG + 'bullet.png',
-    vignette:PATH.IMG + 'vignette.png'
+    vignette:PATH.IMG + 'vignette.png',
+    splash:PATH.IMG + 'splash.png',
+    intro:PATH.IMG + 'intro.png',
+    outro:PATH.IMG + 'outro.png'
 };
 exports.moods = ['anger', 'fear', 'sadness', 'confusion', 'denial'];
 exports.moodGraphicsOrder = {

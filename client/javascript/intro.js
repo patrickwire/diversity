@@ -2,16 +2,17 @@ var gamejs = require('gamejs');
 var LobbyView = require('lobby').View;
 var game = require('gamestate');
 var constants =require('constants');
+var GameView = require('game').View;
 
 exports.View = function(display,realdisplay) {
 
     var timedOut = false;
 
-    setTimeout(function() {timedOut = true;}, 2000);
+    setTimeout(function() {timedOut = true;}, 5000);
 
     this.onTick = function() {
         if (timedOut) {
-            game.loadView(LobbyView);
+            game.loadView(GameView);
         }
 
         display.clear();
@@ -20,7 +21,7 @@ exports.View = function(display,realdisplay) {
         );
         realdisplay.clear();
         //realdisplay.blit(display,[0,0],new gamejs.Rect([0,0], [992, 992]));
-        var image = gamejs.image.load(constants.graphics.splash);
+        var image = gamejs.image.load(constants.graphics.intro);
         var surface = new gamejs.Surface(600, 360);
         surface.blit(image, [0, 0]);
         realdisplay.blit(surface, [0,0]);
