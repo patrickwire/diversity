@@ -30,7 +30,7 @@ exports.moodColors = {
     confusion: "yellow",
     denial: "DarkOrchid"
 };
-exports.map={width: 613, height: 379};
+exports.map={width:992,height:992};
 exports.directions={LEFT:1,RIGHT:3,UP:2,DOWN:4};
 exports.directionOffset={vertical:-3,horizontal:-2};
 exports.player={
