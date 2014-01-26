@@ -22,8 +22,12 @@ exports.Player = function(position,view) {
     this.directionX = 0;
     this.directionY = 0;
     this.image = graphicsDB.getPlayerIconForMood(this.mood);
-    this.layers = [state.mapDB.getLayerForMood(this.mood)];
-    this.currentLayer = this.layers[0];
+    this.layers = {};
+    constants.moods.forEach($.proxy(
+        function(mood) {this.layers[mood] = state.mapDB.getLayerForMood(this.mood);},
+        this
+    ));
+    this.currentLayer = this.layers[this.mood];
     var rect = new gamejs.Rect(position, [24, 24]);
     this.spawn();
     this.draw = function(display) {
@@ -45,9 +49,7 @@ exports.Player = function(position,view) {
             rect = newRect;
         }
         if (this.currentLayer.isFallablePosition(newRect)) {
-
-           this.currentLayer = this.layers[Math.floor(Math.random()*this.layers.length%this.layers.length)];
-            this.spawn();
+            this.switchLayer('confusion');
         }
         if (ticks % 2 === 0) {
             this.publishPosition();
@@ -80,5 +82,12 @@ exports.Player = function(position,view) {
             mood: this.mood,
             bullets: bull
         }));
+    };
+
+    this.switchLayer = function(mood) {
+        this.mood = mood;
+        this.currentLayer = this.layers.confusion;
+        this.spawn();
+        this.image = graphicsDB.getPlayerIconForMood(mood);
     };
 };
