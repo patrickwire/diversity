@@ -54,8 +54,8 @@ exports.View = function(display,realdisplay) {
                     player.winMood();
                 }
                 break;
-            case "GameAborted":
-                state.loadView(AbortedView);
+            case "PlayerLeft":
+                delete otherPlayers[message.playerId];
                 break;
             default:
                 throw "unknown message";

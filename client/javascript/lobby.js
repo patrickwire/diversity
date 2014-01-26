@@ -18,17 +18,11 @@ exports.View = function(display,realdisplay) {
         numPlayers = data.currentPlayersWaiting;
         ourId = data.id;
         break;
-      case "PlayersWaitingUpdate":
-        numPlayers = data.currentPlayersWaiting;
-        break;
-      case "GameAlreadyRunning":
-        alert("Game is already running, sorry");
-        break;
       case "GameStarting":
         state.loadView(IntroView);
         break;
       default:
-        alert("Unknown message");
+        throw "Unknown message";
     }
   };
 
