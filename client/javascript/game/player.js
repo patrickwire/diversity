@@ -55,10 +55,14 @@ exports.Player = function(position,view) {
         ticks++;
 
     };
-    this.shot =function (target){
 
-        var start=rect.center;
-        var bull=new Bullet(start,target,this.currentLayer, this.mood);
+    this.shot = function (target) {
+        if (this.bullets.length >= constants.player.maxBullets) {
+            return;
+        }
+
+        var start = rect.center;
+        var bull = new Bullet(start, target, this);
         this.bullets.push(bull);
     };
 

@@ -18,7 +18,7 @@ exports.Other = function(id, position, mood) {
         bulletId: bullet.id,
         bulletMood: bullet.mood
       }));
-      bullet.visible = false;
+      bullet.destroy();
     }
     return true;
   };
