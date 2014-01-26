@@ -122,6 +122,8 @@ exports.Player = function(position,view) {
         }));
     };
 
+    var confusionTimer = null;
+
     this.switchMood = function(mood) {
         wallhitcount = 0;
         justHitWall = false;
@@ -131,11 +133,36 @@ exports.Player = function(position,view) {
             sadnessTimer = null;
         }
 
+        if (confusionTimer !== null) {
+            clearTimeout(confusionTimer);
+            confusionTimer = null;
+        }
+
         this.mood = mood;
         this.currentLayer = this.layers[mood];
         this.image = graphicsDB.getPlayerIconForMood(mood);
         this.spawn();
         console.log("now in mood " + this.mood);
+
+        if (this.mood === "confusion") {
+            if (confusionTimer !== null) {
+                clearTimeout(confusionTimer);
+                confusionTimer = null;
+            }
+
+            confusionTimer = setTimeout(
+                $.proxy(
+                    function() {
+                        if (this.mood === "confusion") {
+                            this.winMood();
+                        }
+                    },
+                    this
+                ),
+                constants.player.millisecondsTillConfusionWon
+            );
+        }
+
     };
 
     var wonMoods = {};
