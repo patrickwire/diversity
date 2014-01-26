@@ -27,7 +27,7 @@ exports.Player = function(position,view) {
     this.image = graphicsDB.getPlayerIconForMood(this.mood);
     this.layers = {};
     constants.moods.forEach($.proxy(
-        function(mood) {this.layers[mood] = state.mapDB.getLayerForMood(this.mood);},
+        function(mood) {this.layers[mood] = state.mapDB.getLayerForMood(mood);},
         this
     ));
     this.currentLayer = this.layers[this.mood];
