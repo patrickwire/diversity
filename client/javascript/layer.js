@@ -4,7 +4,8 @@ var constants = require('constants');
  * Layer
  * Renders the layer to a big surface.
  */
-exports.Layer = function(layer, opts,map) {
+exports.Layer = function(layer, opts,map, mood) {
+    this.mood = mood;
 
    this.draw = function(display, offset) {
       display.blit(this.surface, offset);

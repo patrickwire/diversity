@@ -15,7 +15,8 @@ exports.MapDB = function(tmxUrl) {
                   height: map.height,
                   tiles: map.tiles
                 },
-                map
+                map,
+                mood
             )
         ];
     });
