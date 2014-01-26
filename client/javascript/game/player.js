@@ -49,7 +49,7 @@ exports.Player = function(position,view) {
             rect = newRect;
         }
         if (this.currentLayer.isFallablePosition(newRect)) {
-            this.switchLayer('confusion');
+            this.switchMood('confusion');
         }
         if (ticks % 2 === 0) {
             this.publishPosition();
@@ -84,7 +84,7 @@ exports.Player = function(position,view) {
         }));
     };
 
-    this.switchLayer = function(mood) {
+    this.switchMood = function(mood) {
         this.mood = mood;
         this.currentLayer = this.layers.confusion;
         this.spawn();
