@@ -2,14 +2,15 @@ var state = require('gamestate');
 var constants = require('constants');
 var gamejs = require('gamejs');
 var guid = require('util').guid;
+var graphicsDB = require('graphicsDB');
 
 exports.Bullet = function(start,target,shooter) {
     this.visible=true;
     this.shooter = shooter;
     this.mood = shooter.mood;
     this.currentLayer = shooter.currentLayer;
-    this.image = gamejs.image.load(constants.graphics.bullet);
-    this.size = this.image.getSize();
+    this.image = graphicsDB.getBulletIconForMood(this.mood);
+    this.size = [8, 8];
     this.directionX=target[0]-start[0];
     this.directionY=target[1]-start[1];
     var scalar=Math.sqrt(this.directionX*this.directionX+this.directionY*this.directionY);
@@ -43,7 +44,7 @@ exports.Bullet = function(start,target,shooter) {
 
     this.draw = function(display) {
         if (this.visible) {
-          display.blit(this.image, this.rect);
+          display.blit(this.image, [this.rect.left - 12, this.rect.top - 12]);
         }
     };
 

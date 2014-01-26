@@ -21,6 +21,9 @@ exports.View = function(display,realdisplay) {
       case "GameStarting":
         state.loadView(IntroView);
         break;
+      case "PlayerStatus":
+        // ignore for now
+        break;
       default:
         throw "Unknown message";
     }

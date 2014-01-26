@@ -77,7 +77,7 @@ exports.View = function(display,realdisplay) {
                 var bull = new Bullet(
                     [data.bullets[i].x,data.bullets[i].y],
                     [data.bullets[i].x,data.bullets[i].y],
-                    player.currentLayer
+                    otherPlayers[data.id]
                 );
                 otherPlayers[data.id].bullets.push(bull);
             }
