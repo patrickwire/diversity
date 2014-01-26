@@ -25,40 +25,56 @@ exports.Bullet = function(start,target,shooter) {
     this.id = guid();
     //Spawn
     this.rect = new gamejs.Rect([start[0],start[1]], this.size);
+
     this.update = function(dt) {
+      if (this.visible) {
         //Movement
         if (!isNaN(this.directionX)  || !isNaN(this.directionY)) {
-            var x = this.directionX * this.speed * dt;
-            var y = this.directionY * this.speed * dt;
-            var newRect = new gamejs.Rect(this.rect);
-            newRect.top = this.rect.top+y;
-            newRect.left = this.rect.left+x;
-            //Move, if we are still inside the screen afterwards
-            if (this.currentLayer.isWalkablePosition(newRect)) {
-                this.rect = newRect;
-            }else{
-                this.destroy();
-            }
+          var x = this.directionX * this.speed * dt;
+          var y = this.directionY * this.speed * dt;
+          var newRect = new gamejs.Rect(this.rect);
+          newRect.top = this.rect.top+y;
+          newRect.left = this.rect.left+x;
+          //Move, if we are still inside the screen afterwards
+          if (this.currentLayer.isWalkablePosition(newRect)) {
+            this.rect = newRect;
+          }else{
+            this.destroy();
+          }
         }
+      } else {
+        this.image = deathAnimation[currentDeathFrame];
+        timeSinceDeathAnimChange += dt;
+        if (timeSinceDeathAnimChange > 0.1) {
+          timeSinceDeathAnimChange = 0;
+          currentDeathFrame += 1;
+
+          if (currentDeathFrame === 5) {
+            this.shooter.bullets = $.grep(
+                this.shooter.bullets,
+                $.proxy(function(bullet) {
+                  return bullet.id !== this.id;
+                }, this)
+              );
+          }
+        }
+
+
+      }
+
     };
 
+    var deathAnimation = graphicsDB.getBulletDeathAnimation(this.mood);
+    var timeSinceDeathAnimChange = null;
+    var currentDeathFrame = 0;
+
     this.draw = function(display) {
-        if (this.visible) {
-          display.blit(this.image, [this.rect.left - 12, this.rect.top - 12]);
-        }
+      display.blit(this.image, [this.rect.left - 12, this.rect.top - 12]);
     };
+
 
     this.destroy = function() {
       this.visible = false;
-
-      // insert bullet death animation here
-
-      // remove the bullet from the shooters queue
-      this.shooter.bullets = $.grep(
-          this.shooter.bullets,
-          $.proxy(function(bullet) {
-            return bullet.id !== this.id;
-          }, this)
-      );
+      timeSinceDeathAnimChange = 0;
     };
 };
