@@ -110,9 +110,14 @@ exports.View = function(display,realdisplay) {
             this.draw(display);
         });
         realdisplay.clear();
+        gamejs.draw.rect(realdisplay, "rgba(0,0,0,1)", new gamejs.Rect([0,0],[600,360]),0);
         var pos =player.getPos();
         pos=[pos[0]-(300),pos[1]-180]
         realdisplay.blit(display,[0,0],new gamejs.Rect(pos, [992, 992]));
+        var image = gamejs.image.load(constants.graphics.vignette);
+        var surface = new gamejs.Surface(600, 360);
+        surface.blit(image, [0, 0]);
+        realdisplay.blit(surface, [0,0]);
     };
 
     this.onEvent = function(event) {

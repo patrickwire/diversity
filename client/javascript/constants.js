@@ -19,7 +19,8 @@ exports.spawnTiles = "spawn";
 exports.mapsPerPlayer = 2;
 exports.graphics = {
     player:PATH.IMG + 'player.png',
-    bullet:PATH.IMG + 'bullet.png'
+    bullet:PATH.IMG + 'bullet.png',
+    vignette:PATH.IMG + 'vignette.png'
 };
 exports.moods = ['anger', 'fear', 'sadness', 'confusion', 'denial'];
 exports.moodGraphicsOrder = {
@@ -40,7 +41,7 @@ exports.map={width:992,height:992};
 exports.directions={LEFT:1,RIGHT:3,UP:2,DOWN:4};
 exports.directionOffset={vertical:-3,horizontal:-2};
 exports.player={
-    speed:40,
+    speed:100,
     startingHitpoints: 3,
     maxBullets: 3,
     wallhitsTillAnger: 10,
