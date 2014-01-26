@@ -94,6 +94,9 @@ exports.Player = function(position,view) {
     };
 
     this.shot = function (target) {
+        if (this.mood === "fear") {
+            return;
+        }
         if (this.bullets.length >= constants.player.maxBullets) {
             return;
         }
