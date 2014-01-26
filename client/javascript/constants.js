@@ -6,11 +6,38 @@ PATH = {
 
 exports.tmxTileset = "./data/tiles1.png";
 exports.tmxFiles = {
-    anger: "./data/anger1.tmx",
-    fear: "./data/fear1.tmx",
-    sadness: "./data/sadness1.tmx",
-    confusion: "./data/confusion1.tmx",
-    denial: "./data/denial1.tmx"
+    anger: [
+        "./data/anger1.tmx",
+        //"./data/anger2.tmx",
+        "./data/anger3.tmx",
+        //"./data/anger4.tmx"
+    ],
+
+    fear: [
+        "./data/fear1.tmx",
+        //"./data/fear2.tmx",
+        "./data/fear3.tmx",
+        //"./data/fear4.tmx"
+    ],
+
+    sadness: [
+        "./data/sadness1.tmx",
+        //"./data/sadness2.tmx",
+        "./data/sadness3.tmx",
+        //"./data/sadness4.tmx"
+    ],
+
+    confusion: [
+        "./data/confusion1.tmx",
+        //"./data/confusion2.tmx",
+        "./data/confusion3.tmx",
+        //"./data/confusion4.tmx"
+    ],
+
+    denial: [
+        "./data/denial1.tmx",
+        "./data/denial2.tmx"
+    ]
 };
 exports.walkableTiles = "walkable";
 exports.fallableTiles = "fallable";
