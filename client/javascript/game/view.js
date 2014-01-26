@@ -118,8 +118,8 @@ exports.View = function(display,realdisplay) {
     this.onEvent = function(event) {
         if (event.type === gamejs.event.MOUSE_UP) {
             var pos =player.getPos();
-            pos=[pos[0]-(300)+event.pos[0],pos[1]-180+event.pos[1]]
-            player.shot(event.pos);
+            pos=[pos[0]-(300)+event.pos[0],pos[1]-180+event.pos[1]];
+            player.shot(pos);
         }
         if (event.type === gamejs.event.KEY_UP) {
             if (event.key === gamejs.event.K_LEFT) {

@@ -97,6 +97,7 @@ exports.Player = function(position,view) {
         if (this.bullets.length >= constants.player.maxBullets) {
             return;
         }
+        debugger;
         if (sadnessTimer !== null) {
             clearTimeout(sadnessTimer);
             sadnessTimer = null;
