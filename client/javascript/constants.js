@@ -4,8 +4,8 @@ PATH = {
     TMX : './tmx/'
 };
 
-exports.tmxTileset = "./data/tileset.png";
-exports.tmxFile = "./data/maps.tmx";
+exports.tmxTileset = "./data/tiles1.png";
+exports.tmxFile = "./data/rage1.tmx";
 exports.walkableTiles = "walkable";
 exports.fallableTiles = "fallable";
 exports.spawnTiles = "spawn";
