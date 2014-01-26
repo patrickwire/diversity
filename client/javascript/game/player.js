@@ -8,10 +8,13 @@ var graphicsDB = require('graphicsDB');
 exports.Player = function(position,view) {
     var ticks=1;
     this.spawn=function(){
-        var spawnpoint=this.currentLayer.findObject(constants.spawnTiles);
-        if(spawnpoint!==undefined){
+        var spawnpoint = this.currentLayer.findObject(constants.spawnTiles);
+
+        if (spawnpoint!==undefined){
             rect.left = spawnpoint[0] + 4;
             rect.top = spawnpoint[1] + 4;
+        } else {
+            throw "no spawn point found";
         }
     };
     this.id = function() {return state.server.ourId;};
