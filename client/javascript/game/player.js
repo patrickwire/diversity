@@ -35,8 +35,9 @@ exports.Player = function(position,view) {
     var rect = new gamejs.Rect(position, [24, 24]);
     this.spawn();
     this.draw = function(display) {
-        if(this.lastHit<0.5||this.lastHit>1)
-        display.blit(this.image, [rect.left - 4, rect.top - 4]);
+        if(this.lastHit<0.5||this.lastHit>1) {
+            display.blit(this.image, [rect.left - 4, rect.top - 4]);
+        }
     };
 
     var wallhitcount = 0;

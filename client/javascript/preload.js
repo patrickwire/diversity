@@ -10,4 +10,4 @@ gamejs.preload([
     constants.graphics.splash,
     constants.graphics.outro,
     constants.graphics.intro
-].concat(Object.keys(constants.tmxFiles)));
+]);
