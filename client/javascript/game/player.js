@@ -66,7 +66,7 @@ exports.Player = function(position,view) {
         newRect.left = newLeft;
         //Move, if we are still inside the screen afterwards
         if (this.currentLayer.isFallablePosition(newRect)) {
-            if (this.mood === 'fear') {
+            if (this.mood === 'fear' && this.currentLayer.isFearExitPosition(rect)) {
                 this.winMood();
             }
             this.switchMood('confusion');
