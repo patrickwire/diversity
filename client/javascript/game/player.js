@@ -203,6 +203,7 @@ exports.Player = function(position,view) {
             this.winMood();
         }
     };
+
     this.getPos=function(){
         return rect.center;
     };
