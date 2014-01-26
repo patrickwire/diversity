@@ -32,6 +32,13 @@ exports.View = function(display) {
                     $('.hp-display').append(
                         '<span style="color: ' + constants.moodColors[message.bulletMood] + '">•</span>'
                         );
+                    if (player.hitpoints === 1) {
+                        player.switchMood("fear");
+                    } else if (player.hitpoints === 0) {
+                        player.switchMood("sadness");
+                        $('.hp-display').empty();
+                        player.hitpoints = constants.player.startingHitpoints;
+                    }
                 }
                 break;
             default:
