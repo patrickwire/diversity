@@ -22,7 +22,7 @@ exports.Player = function(position,view) {
     this.directionX = 0;
     this.directionY = 0;
     this.image = graphicsDB.getPlayerIconForMood(this.mood);
-    this.layers = state.mapDB.getRandomLayers(constants.mapsPerPlayer);
+    this.layers = [state.mapDB.getLayerForMood(this.mood)];
     this.currentLayer = this.layers[0];
     var rect = new gamejs.Rect(position, [24, 24]);
     this.spawn();
