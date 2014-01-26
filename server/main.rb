@@ -70,6 +70,11 @@ class Game
     elsif old_player_count == MAX_PLAYERS and @players.length < MAX_PLAYERS
         $games[:full].delete self
         $games[:with_slots] << self
+
+        if $waitingPlayer
+          add_player $waitingPlayer
+          $waitingPlayer = nil
+        end
     end
   end
 end
@@ -79,7 +84,7 @@ $games = {
   with_slots: []
 }
 
-waitingPlayer = nil;
+$waitingPlayer = nil
 
 LOG.debug "FSK Server starting up..."
 
@@ -98,13 +103,13 @@ EM.run do
       if $games[:with_slots].any?
         LOG.debug "found game with slot, adding player"
         $games[:with_slots][0].add_player(player)
-      elsif waitingPlayer
+      elsif $waitingPlayer
         LOG.debug "got someone waiting already, starting game"
-        $games[:with_slots] << Game.new([waitingPlayer, player]);
-        waitingPlayer = nil
+        $games[:with_slots] << Game.new([$waitingPlayer, player])
+        $waitingPlayer = nil
       else
         LOG.debug "queuing player waiting for the next one"
-        waitingPlayer = player
+        $waitingPlayer = player
       end
     end
 
@@ -114,8 +119,8 @@ EM.run do
     end
 
     socket.onclose do
-      if waitingPlayer && waitingPlayer.socket.object_id == socket.object_id
-        waitingPlayer = nil
+      if $waitingPlayer && $waitingPlayer.socket.object_id == socket.object_id
+        $waitingPlayer = nil
       end
     end
   end
