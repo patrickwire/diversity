@@ -67,6 +67,14 @@ exports.Layer = function(layer, opts,map) {
        return !invalid;
    };
 
+   this.isDenialExitPosition = function(rect) {
+       var overlappingArea = this.getOverlappingArea(rect);
+       return overlappingArea.some(function(row) {
+           return row.some(function(tile) {
+               return tile.finishDenial;
+           });
+       });
+   };
 
    this.surface = new gamejs.Surface(opts.width * opts.tileWidth, opts.height * opts.tileHeight);
    this.surface.setAlpha(layer.opacity);

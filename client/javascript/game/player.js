@@ -73,6 +73,9 @@ exports.Player = function(position,view) {
         } else if (this.currentLayer.isWalkablePosition(newRect)) {
             rect = newRect;
             justHitWall = false;
+            if (this.mood === 'denial' && this.currentLayer.isDenialExitPosition(rect)) {
+                this.winMood();
+            }
         } else {
             if (!justHitWall) {
                 wallhitcount += 1;
