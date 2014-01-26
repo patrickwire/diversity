@@ -49,15 +49,16 @@ exports.Player = function(position,view) {
            this.currentLayer = this.layers[Math.floor(Math.random()*this.layers.length%this.layers.length)];
             this.spawn();
         }
-        if(ticks%2==0)
-        this.publishPosition();
+        if(ticks%2===0) {
+            this.publishPosition();
+        }
         ticks++;
 
     };
     this.shot =function (target){
 
         var start=rect.center;
-        var bull=new Bullet(start,target,this.currentLayer);
+        var bull=new Bullet(start,target,this.currentLayer, this.mood);
         this.bullets.push(bull);
     };
 

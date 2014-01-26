@@ -3,8 +3,9 @@ var constants = require('constants');
 var gamejs = require('gamejs');
 var guid = require('util').guid;
 
-exports.Bullet=function(start,target,currentLayer) {
+exports.Bullet=function(start,target,currentLayer, mood) {
     this.visible=true;
+    this.mood = mood;
     this.currentLayer=currentLayer;
     this.image = gamejs.image.load(constants.graphics.bullet);
     this.size = this.image.getSize();

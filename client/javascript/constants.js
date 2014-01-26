@@ -23,6 +23,13 @@ exports.moodGraphicsOrder = {
     confusion: 3,
     denial: 4
 };
+exports.moodColors = {
+    anger: "red",
+    fear: "green",
+    sadness: "blue",
+    confusion: "yellow",
+    denial: "DarkOrchid"
+};
 exports.map={width:992,height:992};
 exports.directions={LEFT:1,RIGHT:3,UP:2,DOWN:4};
 exports.directionOffset={vertical:-3,horizontal:-2};

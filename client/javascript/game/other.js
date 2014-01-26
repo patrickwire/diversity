@@ -15,7 +15,8 @@ exports.Other = function(id, position, mood) {
       state.server.connection.send(JSON.stringify({
         type: "Hit",
         playerId: this.id,
-        bulletId: bullet.id
+        bulletId: bullet.id,
+        bulletMood: bullet.mood
       }));
       bullet.visible = false;
     }
