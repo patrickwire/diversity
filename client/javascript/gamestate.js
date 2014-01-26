@@ -1,6 +1,7 @@
 var gamejs = require('gamejs');
 var MapDB = require('mapDB').MapDB;
 var constants = require('constants');
+var ConnectionLostView = require('connectionLost').ConnectionLostView;
 
 gamestate = exports;
 
@@ -48,9 +49,10 @@ exports.server.connect = function() {
         }
     };
     exports.server.connection.onclose = function(close) {
-        alert("Got close!");
         if (exports.server.onclose) {
             exports.server.onclose();
+        } else {
+            exports.loadView(ConnectionLostView);
         }
     };
 };
