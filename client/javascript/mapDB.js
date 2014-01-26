@@ -5,7 +5,7 @@ var constants = require("constants");
 exports.MapDB = function() {
     var layersByMood = {};
     constants.moods.forEach(function(mood) {
-        var map = tmx.Map(constants.tmxFiles[mood]);
+        var map = new tmx.Map(constants.tmxFiles[mood]);
         layersByMood[mood] = [
             new Layer(
                 map.layers[0],
