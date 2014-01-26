@@ -8,7 +8,7 @@ exports.Layer = function(layer, opts, map, mood) {
     this.mood = mood;
 
    this.draw = function(display, offset) {
-      display.blit(this.surface, offset);
+      display.blit(this.surface,[0,0]);
    };
 
    /** Returns 2-dimensional array of overlapping tiles */
