@@ -183,6 +183,7 @@ exports.Player = function(position,view) {
                 allWon = false;
             }
         });
+        $('.win-display').append('<img src="graphics/star_' + this.mood + '.png" />');
         if (allWon) {
             alert("HAPPY!HAPPY!HAPPY!");
         }
