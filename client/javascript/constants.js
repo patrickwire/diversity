@@ -40,12 +40,12 @@ exports.map={width:992,height:992};
 exports.directions={LEFT:1,RIGHT:3,UP:2,DOWN:4};
 exports.directionOffset={vertical:-3,horizontal:-2};
 exports.player={
-    speed:20,
+    speed:40,
     startingHitpoints: 3,
     maxBullets: 3,
     wallhitsTillAnger: 4,
     millisecondsTillSadness: 10000
 };
 exports.bullet={
-    speed:20
+    speed:50
 };

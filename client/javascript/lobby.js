@@ -2,7 +2,7 @@ var gamejs = require('gamejs');
 var GameView = require('game').View;
 var state = require('gamestate');
 
-exports.View = function(display) {
+exports.View = function(display,realdisplay) {
 
   var registered = false;
   var numPlayers;
@@ -44,6 +44,8 @@ exports.View = function(display) {
       display.blit((new gamejs.font.Font('30px Sans-serif')).render(message));
 
     }
+      realdisplay.clear();
+      realdisplay.blit(display,[0,0],new gamejs.Rect([0,0], [992, 992]));
   };
 
   this.onEvent = function(event) {

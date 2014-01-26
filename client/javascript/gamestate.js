@@ -9,14 +9,15 @@ exports.display = null;
 exports.mapDB = null;
 
 exports.loadView = function(View) {
-    exports.currentView = new View(exports.display);
+    exports.currentView = new View(exports.display,exports.realdisplay);
     gamejs.onEvent(exports.currentView.onEvent);
     gamejs.onTick(exports.currentView.onTick);
 };
 
 
 exports.initialize = function() {
-    exports.display = gamejs.display.setMode([992, 992]);
+    exports.display =new gamejs.Surface([992,992]);
+    exports.realdisplay = gamejs.display.setMode([600, 360]);
     exports.mapDB = new MapDB();
 };
 

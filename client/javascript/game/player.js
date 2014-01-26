@@ -157,4 +157,7 @@ exports.Player = function(position,view) {
             alert("HAPPY!HAPPY!HAPPY!");
         }
     };
+    this.getPos=function(){
+        return rect.center;
+    }
 };

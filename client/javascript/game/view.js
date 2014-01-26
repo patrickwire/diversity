@@ -6,19 +6,21 @@ var state = require('gamestate');
 var constants = require('constants');
 var Other = require('game/other').Other;
 
-exports.View = function(display) {
-
+exports.View = function(display,realdisplay) {
+    this.offset=[0,0];
     var keys = {
         LEFT:false,
         RIGHT:false,
         UP:false,
         DOWN:false
     };
-    var player = new Player([4,4]);
+    var player = new Player([4,4],this);
     player.publishPosition();
 
     var drawBackground = function() {
-        player.currentLayer.draw(state.display);
+        var offset=player.getPos();
+        gamejs.log(offset);
+        player.currentLayer.draw(state.display,offset);
     };
 
     state.server.onmessage = $.proxy(function(message) {
@@ -96,10 +98,16 @@ exports.View = function(display) {
         $.each(player.bullets, function( index, value ) {
             this.draw(display);
         });
+        realdisplay.clear();
+        var pos =player.getPos();
+        pos=[pos[0]-(300),pos[1]-180]
+        realdisplay.blit(display,[0,0],new gamejs.Rect(pos, [992, 992]));
     };
 
     this.onEvent = function(event) {
         if (event.type === gamejs.event.MOUSE_UP) {
+            var pos =player.getPos();
+            pos=[pos[0]-(300)+event.pos[0],pos[1]-180+event.pos[1]]
             player.shot(event.pos);
         }
         if (event.type === gamejs.event.KEY_UP) {
@@ -139,5 +147,6 @@ exports.View = function(display) {
             }
         }
     };
+
     return this;
 };
