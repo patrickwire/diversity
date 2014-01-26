@@ -5,6 +5,7 @@ var Layer = require('layer').Layer;
 var state = require('gamestate');
 var constants = require('constants');
 var Other = require('game/other').Other;
+var AbortedView = require('aborted').AbortedView;
 
 exports.View = function(display,realdisplay) {
     this.offset=[0,0];
@@ -52,8 +53,10 @@ exports.View = function(display,realdisplay) {
                     player.winMood();
                 }
                 break;
+            case "GameAborted":
+                state.loadView(AbortedView);
+                break;
             default:
-                alert("unknown message");
                 throw "unknown message";
         }
     }, this);

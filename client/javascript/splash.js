@@ -23,6 +23,4 @@ exports.View = function(display,realdisplay) {
 
     this.onEvent = function(event) {
     };
-
-    return this;
 };

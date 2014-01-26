@@ -94,10 +94,13 @@ exports.Player = function(position,view) {
     };
 
     this.shot = function (target) {
+        if (this.mood === "fear") {
+            return;
+        }
         if (this.bullets.length >= constants.player.maxBullets) {
             return;
         }
-
+        debugger;
         if (sadnessTimer !== null) {
             clearTimeout(sadnessTimer);
             sadnessTimer = null;
@@ -181,6 +184,7 @@ exports.Player = function(position,view) {
                 allWon = false;
             }
         });
+        $('.win-display').append('<img src="graphics/star_' + this.mood + '.png" />');
         if (allWon) {
             alert("HAPPY!HAPPY!HAPPY!");
         }
@@ -201,7 +205,8 @@ exports.Player = function(position,view) {
             this.winMood();
         }
     };
+
     this.getPos=function(){
         return rect.center;
-    }
+    };
 };
