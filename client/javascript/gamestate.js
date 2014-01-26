@@ -16,7 +16,7 @@ exports.loadView = function(View) {
 
 
 exports.initialize = function() {
-    exports.display = gamejs.display.setMode([600, 400]);
+    exports.display = gamejs.display.setMode([992, 992]);
     exports.mapDB = new MapDB(constants.tmxFile);
 };
 

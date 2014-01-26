@@ -23,7 +23,7 @@ exports.moodGraphicsOrder = {
     confusion: 3,
     denial: 4
 };
-exports.map={width:600,height:400};
+exports.map={width:992,height:992};
 exports.directions={LEFT:1,RIGHT:3,UP:2,DOWN:4};
 exports.directionOffset={vertical:-3,horizontal:-2};
 exports.player={
