@@ -5,15 +5,18 @@
 <!-- Styling -->
     <style type=text/css>
         body{
-           background:#fff;
-           color:#222;
+           background:#000;
+           color:#000;
            margin:1em 0 2em 6em;
            padding:0;
+            text-align: center;
         }
         #gjs-loader {
             width: 50%;
             height: 50%;
             background: url('./public/ajax-loader.gif');
+            border-style: none;
+            border:1px solid #000000;
         }
     </style>
 <!-- Start javascript/main.js -->
@@ -27,7 +30,7 @@
 </head>
 <!-- Html -->
 <body>
-    <div style="width: 600px;">
+    <div style="text-align: center">
         <div class="hp-display" style="float: left; font-size: 30px; line-height: 30px; min-height: 32px; min-width: 1px;"></div>
         <div class="win-display" style="float: right; min-height: 32px; min-width: 1px;"></div>
         <div style="clear: both;"></div>
@@ -36,7 +39,7 @@
         </div>
         <canvas id="gjs-canvas"></canvas>
         <p>
-        Powered by <a href="http://gamejs.org">GameJs</a>.
+
         </p>
     </div>
 </body>
