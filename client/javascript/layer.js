@@ -68,6 +68,21 @@ exports.Layer = function(layer, opts, map, mood) {
        return !invalid;
    };
 
+   this.isFearExitPosition = function(rect) {
+       var overlappingArea = this.getOverlappingArea(rect);
+       return overlappingArea.some(function(row) {
+           return row.some(function(tile) {
+               var p;
+               var properties = map.tiles.getProperties(tile.gid);
+               for (p in properties) {
+                   if(properties.hasOwnProperty(p) && p === "finishFear") {
+                       return true;
+                   }
+               }
+           });
+       });
+   };
+
    this.isDenialExitPosition = function(rect) {
        var overlappingArea = this.getOverlappingArea(rect);
        return overlappingArea.some(function(row) {
