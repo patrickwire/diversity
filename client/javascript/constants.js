@@ -46,7 +46,6 @@ exports.spawnTiles = "spawn";
 exports.mapsPerPlayer = 2;
 exports.graphics = {
     player:PATH.IMG + 'player.png',
-    bullet:PATH.IMG + 'bullet.png',
     vignette:PATH.IMG + 'vignette.png',
     splash:PATH.IMG + 'splash.png',
     intro:PATH.IMG + 'intro.png',
